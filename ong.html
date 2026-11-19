@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ONG e terceiro setor | Levantamento Quantitare</title>
+<meta name="description" content="São 63 mil organizações a mais em dois anos, disputando o mesmo financiamento. Três números públicos, e o que nenhum deles mede.">
+<link rel="icon" href="assets/quantitare-simbolo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: faixas editoriais alternando branco → cinza-claro, container 1200px,
+   rodapé escuro fechando a página. Tokens do design-system/DESIGN.md. */
+:root{
+  --ink:#111111; --ink-active:#242424; --body:#374151; --muted:#6b7280; --muted-soft:#898989;
+  --hairline:#e5e7eb; --hairline-soft:#f3f4f6;
+  --canvas:#ffffff; --surface-soft:#f8f9fa; --surface-card:#f5f5f5; --surface-strong:#e5e7eb;
+  --surface-dark:#101010; --on-primary:#ffffff; --on-dark:#ffffff; --on-dark-soft:#a1a1aa;
+  --saez-azul:#1256D3; --ambar:#f59e0b; --ambar-texto:#b45309;
+  --q-violeta:#102694; --q-ciano:#009EDD; --q-aco:#3A5A8C;
+  --display:"Manrope","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-pill:9999px;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--body);
+  font-family:var(--sans);font-size:16px;line-height:1.5;
+  -webkit-font-smoothing:antialiased}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+h1,h2,h3,h4{font-family:var(--display);color:var(--ink);font-weight:700;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.25rem,6vw,4rem);line-height:1.05;letter-spacing:clamp(-2px,-.35vw,-.8px)}
+h2{font-size:clamp(1.75rem,4vw,3rem);line-height:1.1;letter-spacing:clamp(-1.5px,-.25vw,-.5px)}
+h3{font-size:clamp(1.35rem,2.5vw,2.25rem);line-height:1.15;letter-spacing:-1px}
+h4{font-family:var(--sans);font-size:1.125rem;font-weight:600;line-height:1.4;letter-spacing:0}
+p{margin:0}
+a{color:var(--ink)}
+img,svg{max-width:100%}
+.faixa{width:100%}
+.faixa--cinza{background:var(--surface-soft)}
+.faixa--escura{background:var(--surface-dark)}
+.wrap{max-width:1200px;margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:clamp(56px,9vw,96px)}
+.wrap--nav{padding-block:0}
+.eyebrow{font-size:.8125rem;font-weight:500;line-height:1.4;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted)}
+.lead{font-size:1.125rem;font-weight:600;color:var(--ink);line-height:1.4}
+.regua{font-size:.8125rem;font-weight:500;line-height:1.45;color:var(--muted)}
+.miudo{font-size:.875rem;line-height:1.5;color:var(--muted)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* Navegação */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
+  background:var(--canvas);border-bottom:1px solid var(--hairline)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);
+  z-index:21;background:var(--canvas)}
+.nav__inner{max-width:1200px;margin:0 auto;min-height:64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;align-items:center;gap:24px;flex-wrap:wrap;padding-block:12px}
+.marca{font-family:var(--display);font-weight:700;font-size:1.0625rem;letter-spacing:-.5px;
+  color:var(--ink);text-decoration:none;white-space:nowrap}
+.marca span{color:var(--muted-soft);font-weight:500}
+.nav__links{display:flex;gap:20px;flex-wrap:wrap;margin-left:auto;align-items:center}
+.nav__links a{font-size:.875rem;font-weight:500;color:var(--body);text-decoration:none}
+.nav__links a:hover{color:var(--ink)}
+.nav__links a.btn--primario{color:var(--on-primary)}
+.nav__links a.btn--primario:hover{color:var(--on-primary)}
+.nav__links a.btn--secundario{color:var(--ink)}
+@media (max-width:760px){.nav__links a:not(.btn){display:none}.marca span{display:none}
+  .nav__inner{gap:12px}.btn{padding:12px 16px}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:12px 20px;border-radius:var(--r-md);
+  font-family:var(--sans);font-size:.875rem;font-weight:600;line-height:1;
+  text-decoration:none;cursor:pointer;border:1px solid transparent}
+.btn--primario{background:var(--ink);color:var(--on-primary)}
+.btn--primario:hover{background:var(--ink-active)}
+.btn--secundario{background:var(--canvas);color:var(--ink);border-color:#8a8a8e}
+.btn--secundario:hover{border-color:var(--ink)}
+.btn--escuro-sec{background:transparent;color:var(--on-dark);border-color:#3f3f46}
+.btn--claro{background:var(--canvas);color:var(--ink)}
+.btn--ambar{background:var(--ambar);color:#111111;border-color:transparent}
+.btn--ambar:hover{background:#d98806}
+:is(a,button,summary):focus-visible{outline:2px solid var(--saez-azul);outline-offset:3px;border-radius:var(--r-sm)}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,48px);align-items:start}
+.hero>*{min-width:0}
+@media (max-width:980px){.hero{grid-template-columns:1fr}}
+.hero__texto>*+*{margin-top:24px}
+.hero__texto p{max-width:34em}
+.botoes{display:flex;gap:12px;flex-wrap:wrap}
+
+/* Cartões */
+.cartao{background:var(--surface-card);border-radius:var(--r-lg);padding:clamp(20px,3vw,32px)}
+.cartao--branco{background:var(--canvas);border:1px solid var(--hairline)}
+.cartao>*+*{margin-top:16px}
+.grade{display:grid;gap:24px}
+.grade--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grade--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:980px){.grade--3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){.grade--3,.grade--2{grid-template-columns:1fr}}
+.selo{display:inline-block;padding:4px 12px;border-radius:var(--r-pill);
+  background:var(--surface-strong);color:var(--ink);
+  font-size:.8125rem;font-weight:500;line-height:1.4}
+.selo--q{background:rgba(16,38,148,.08);color:var(--q-violeta)}
+
+/* Corrente quebrada */
+.corrente{font-family:var(--mono);font-size:.8125rem;line-height:1.9;color:var(--body);
+  background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-md);
+  padding:12px 14px;overflow-x:auto}
+.corrente b{color:var(--ink);font-weight:500}
+.corrente .ok{color:var(--muted-soft)}
+.corrente .nao{color:#b42318;font-weight:500}
+.citacao{border-left:2px solid var(--ink);padding-left:16px;font-size:1.0625rem;color:var(--ink)}
+.citacao--q{border-left-color:var(--q-violeta)}
+
+/* Tabelas */
+.tabela-rolagem{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;min-width:0}
+table{width:100%;border-collapse:collapse;font-size:.9375rem;min-width:440px}
+caption{text-align:left;font-size:.8125rem;font-weight:500;color:var(--muted);padding-bottom:12px}
+th,td{text-align:left;padding:12px 16px 12px 0;border-bottom:1px solid var(--hairline);vertical-align:top}
+th{font-weight:600;color:var(--ink);font-size:.8125rem;letter-spacing:.04em;text-transform:uppercase}
+td.v,th.v{text-align:right;padding-right:0;font-family:var(--mono);font-variant-numeric:tabular-nums}
+th.v{font-family:var(--sans)}
+tr:last-child td{border-bottom:0}
+
+/* Método: trilho em vez de cartão, na mesma linguagem da corrente */
+.trilho{display:grid;gap:clamp(24px,4vw,40px);grid-template-columns:repeat(3,minmax(0,1fr));
+  border-top:2px solid var(--surface-strong)}
+.trilho>*{position:relative;min-width:0;padding-top:36px}
+.trilho>*::before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;
+  border-radius:50%;background:var(--saez-azul)}
+.trilho>*>*+*{margin-top:12px}
+.trilho ul{margin:0;padding-left:20px;font-size:.9375rem}
+.trilho li+li{margin-top:8px}
+.trilho .arte{margin:0 0 18px}
+.trilho .arte svg{display:block;width:172px;max-width:100%;height:auto}
+.emblema{display:block;width:78px;height:auto;margin-bottom:18px}
+.trilho .fase-rotulo{font-size:.8125rem;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--saez-azul)}
+@media (max-width:860px){
+  .trilho{grid-template-columns:1fr;border-top:0;border-left:2px solid var(--surface-strong);
+    padding-left:28px;gap:40px}
+  .trilho>*{padding-top:0}
+  .trilho>*::before{top:5px;left:-35px}
+}
+
+/* Duas colunas separadas por fio, sem caixa */
+.dupla{display:grid;gap:clamp(32px,5vw,56px);grid-template-columns:repeat(2,minmax(0,1fr))}
+.dupla>*{min-width:0}
+.dupla>*+*{border-left:1px solid var(--hairline);padding-left:clamp(32px,5vw,56px)}
+.dupla h3,.dupla h4{margin-bottom:12px}
+@media (max-width:760px){
+  .dupla{grid-template-columns:1fr;gap:32px}
+  .dupla>*+*{border-left:0;border-top:1px solid var(--hairline);padding-left:0;padding-top:32px}
+}
+
+/* Quantitare */
+.q-cabeca{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.q-cabeca img{width:44px;height:44px}
+.q-nome{font-family:var(--display);font-weight:700;font-size:1.5rem;letter-spacing:-.5px;
+  color:var(--q-violeta)}
+
+/* Preço */
+.preco{font-family:var(--display);font-size:clamp(1.5rem,3vw,1.75rem);font-weight:700;
+  letter-spacing:-.5px;color:var(--ink)}
+
+/* CTA + rodapé */
+.cta{background:var(--surface-card);border-radius:var(--r-lg);padding:clamp(28px,5vw,48px);
+  display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.cta>div{min-width:0}
+.rodape{color:var(--on-dark-soft);font-size:.875rem}
+.rodape h4,.rodape .marca{color:var(--on-dark)}
+.rodape a{color:var(--on-dark-soft);text-decoration:none}
+.rodape a:hover{color:var(--on-dark)}
+.rodape__grade{display:grid;gap:32px;grid-template-columns:2fr 1fr 1fr 1fr}
+@media (max-width:980px){.rodape__grade{grid-template-columns:1fr 1fr}}
+@media (max-width:460px){.rodape__grade{grid-template-columns:1fr}}
+.rodape__linha{margin-top:40px;padding-top:24px;border-top:1px solid #27272a;
+  display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between;font-size:.8125rem}
+.lista-limpa{list-style:none;margin:0;padding:0}
+.lista-limpa li+li{margin-top:10px}
+/* Cor por setor: acompanha o setor, não decora o cartão */
+.selo--obra{background:rgba(18,86,211,.09);color:#1256D3}
+.selo--sind{background:rgba(16,38,148,.09);color:#102694}
+.selo--ong{background:rgba(0,158,221,.12);color:#00698f}
+.faixa--tinta{background:#f4f6fd}
+.porta figure{margin:0}
+.porta svg{display:block;width:100%;height:auto}
+
+/* Números gerais */
+.numeros{display:grid;gap:24px;grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:860px){.numeros{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.numero strong{display:block;font-family:var(--display);font-weight:700;color:var(--saez-azul);
+  font-size:clamp(1.75rem,3.5vw,2.5rem);line-height:1;letter-spacing:-1px}
+.numero .regua{margin-top:8px}
+
+/* Mercado: número grande + ficha técnica em mono, que é a assinatura da casa */
+.mercado{display:grid;gap:clamp(24px,4vw,40px);grid-template-columns:repeat(3,minmax(0,1fr))}
+.mercado>article{display:flex;flex-direction:column;min-width:0}
+.mercado>article>strong{display:block;margin-top:16px;font-family:var(--display);font-weight:700;
+  font-size:clamp(2.25rem,4.5vw,3rem);line-height:1;letter-spacing:-1.5px;color:var(--ink)}
+.mercado-frase{margin-top:10px;color:var(--body)}
+.data-dado{margin-top:12px;font-size:.8125rem;font-weight:500;color:var(--muted-soft)}
+.contexto{margin-top:16px;font-size:.9375rem;line-height:1.55;color:var(--body)}
+.impacto{margin-top:14px;font-size:.9375rem;line-height:1.5;color:var(--body)}
+.impacto strong{color:var(--ink);font-family:var(--sans);font-size:inherit;font-weight:600;letter-spacing:0}
+.mercado .miudo{margin-top:16px}
+.mercado .impacto:last-of-type{margin-bottom:22px}
+.mercado .btn{margin-top:auto;align-self:flex-start}
+.gr{margin:20px 0 0}
+.gr svg{display:block;width:100%;height:auto;max-width:400px}
+.gr figcaption{margin-top:10px;font-size:.75rem;color:var(--muted-soft)}
+.ficha{margin-top:16px;padding:12px 14px;background:var(--surface-card);
+  border-radius:var(--r-md);font-family:var(--mono);font-size:.75rem;line-height:1.7;
+  color:var(--muted)}
+.ficha b{color:var(--body);font-weight:500}
+.ficha a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+.ficha a:hover{color:var(--ink)}
+@media (max-width:860px){.mercado{grid-template-columns:1fr}}
+
+/* Modelo de relatório: a folha, não o painel */
+.folha{background:var(--canvas);border:1px solid var(--surface-strong);border-radius:var(--r-md);
+  padding:clamp(20px,3vw,32px);box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.folha__cab{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;
+  padding-bottom:16px;border-bottom:1px solid var(--hairline)}
+.folha__cab h4{margin:0}
+.folha__sel{font-family:var(--mono);font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);border:1px solid var(--hairline);border-radius:var(--r-pill);padding:3px 10px}
+.folha table{min-width:0;font-size:.875rem;margin-top:20px}
+.folha th,.folha td{padding:9px 12px 9px 0}
+.folha__com{margin-top:24px;padding-top:20px;border-top:1px solid var(--hairline)}
+.folha__com ol{margin:16px 0 0;padding-left:20px;font-size:.9375rem}
+.folha__com li+li{margin-top:10px}
+.folha__com li b{color:var(--ink)}
+.folha__assin{margin-top:20px;font-size:.875rem;color:var(--muted)}
+.faixa--azul{background:#eef3fd}
+/* Serviço: uma faixa horizontal por serviço, empilhadas */
+.servico{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(24px,4vw,48px);align-items:start}
+.servico+.servico{margin-top:clamp(40px,6vw,56px);padding-top:clamp(40px,6vw,56px);
+  border-top:1px solid var(--hairline)}
+@media (max-width:860px){.servico{grid-template-columns:1fr}}
+.rel-graficos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,32px);
+  margin-top:28px;padding-top:24px;border-top:1px solid var(--hairline)}
+@media (max-width:640px){.rel-graficos{grid-template-columns:1fr}}
+.rel-graficos h5{margin:0 0 10px;font-family:var(--sans);font-size:.8125rem;font-weight:600;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.rel-graficos svg{display:block;width:100%;max-width:300px;height:auto}
+.analise{margin-top:14px;font-size:.875rem;line-height:1.5;color:var(--body)}
+.analise b{display:block;font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted-soft);margin-bottom:3px}
+.tira{display:grid;gap:clamp(16px,2vw,24px);margin-top:20px}
+.tira--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tira--4{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:520px){.tira--3,.tira--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tira figure{margin:0;min-width:0}
+.tira svg{display:block;width:100%;height:auto}
+.tira figcaption{margin-top:8px;font-size:.8125rem;font-weight:600;color:var(--saez-azul)}
+.tira--q figcaption{color:var(--q-violeta)}
+.tira p{margin-top:2px;font-size:.8125rem;color:var(--muted);line-height:1.45}
+.marca-q{display:flex;align-items:center;gap:12px;margin-top:22px;padding-top:18px;
+  border-top:1px solid var(--hairline)}
+.marca-q img{width:44px;height:auto;flex:none}
+.marca-q p{font-size:.8125rem;line-height:1.5;color:var(--muted)}
+.marca-q b{display:block;font-family:var(--display);font-size:1rem;letter-spacing:-.3px;
+  color:var(--q-violeta)}
+.dado-setor{margin-top:14px;padding:10px 12px;background:var(--surface-soft);
+  border-radius:var(--r-md);font-size:.8125rem;line-height:1.5;color:var(--body)}
+.dado-setor b{font-family:var(--mono);font-weight:500;color:var(--ink)}
+.dado-setor span{display:block;margin-top:3px;font-size:.75rem;color:var(--muted-soft)}
+.q-simbolo{width:clamp(80px,9vw,112px);height:auto;flex:none}
+.q-faixa{display:flex;gap:clamp(24px,4vw,48px);align-items:center;flex-wrap:wrap}
+.q-faixa>div{min-width:0;flex:1 1 320px}
+
+.autor{display:flex;gap:clamp(20px,3vw,28px);align-items:center;flex-wrap:wrap;margin-top:24px}
+.autor img{width:clamp(104px,12vw,140px);height:auto;flex:none;border-radius:50%;
+  background:var(--canvas)}
+.autor p{min-width:0;flex:1 1 320px;max-width:40em}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+<style>
+.volta{font-size:.875rem;font-weight:500;color:var(--muted);text-decoration:none}
+.volta:hover{color:var(--ink)}
+.capa{display:flex;gap:clamp(20px,4vw,40px);align-items:center;flex-wrap:wrap}
+.capa>div{flex:1 1 320px;min-width:0}
+.selo-setor{display:inline-block;padding:4px 12px;border-radius:var(--r-pill);
+  font-size:.8125rem;font-weight:500}
+.bloco{border-top:1px solid var(--hairline);padding-top:clamp(28px,4vw,40px);
+  margin-top:clamp(28px,4vw,40px)}
+.bloco:first-of-type{border-top:0;padding-top:0;margin-top:clamp(28px,4vw,40px)}
+.bloco__grade{display:grid;gap:clamp(24px,4vw,48px);grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  align-items:start;margin-top:24px}
+@media (max-width:860px){.bloco__grade{grid-template-columns:1fr}}
+.atualizado{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;
+  border-radius:var(--r-pill);background:var(--surface-card);
+  font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.emblema-setor{display:block;width:84px;height:auto;margin-top:18px}
+.vazio{border:1px dashed var(--surface-strong);border-radius:var(--r-lg);
+  padding:clamp(20px,3vw,32px);background:transparent}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav__inner">
+    <a class="marca" href="index.html">Sáez Marketing <span>· medição e evidência</span></a>
+    <nav class="nav__links" aria-label="Seções">
+      <a class="volta" href="index.html#mercado">← Voltar ao levantamento</a>
+      <a class="btn btn--primario" href="https://wa.me/5561985993459?text=Oi%20Neftal%C3%AD%2C%20vi%20a%20p%C3%A1gina%20de%20ONG%20e%20queria%20receber%20o%20diagn%C3%B3stico." rel="noopener">Receber o diagnóstico</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="faixa faixa--tinta">
+  <div class="wrap">
+    <div class="capa">
+      <img class="q-simbolo" src="assets/quantitare-simbolo.svg" alt="Símbolo do Quantitare" width="112" height="112">
+      <div>
+        <p class="q-nome">Levantamento Quantitare</p>
+        <span class="selo-setor" style="background:#00698f14;color:#00698f;margin-top:10px">ONG</span>
+        <svg class="emblema-setor" viewBox="0 0 86 86" role="img" aria-label="Uma planta de levantamento: parcela demarcada com marcos nos vértices, pontos já levantados e pontos pendentes, norte e escala."><path d="M 14.3 30.0 C 22.0 24.8 32.8 19.2 39.6 14.1" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 13.5 29.6 C 22.3 23.7 31.3 18.8 40.4 13.6" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 39.6 14.4 C 50.1 19.6 62.7 26.5 72.4 32.2" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 39.9 14.1 C 49.6 20.9 61.1 26.2 71.8 31.7" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 72.0 31.6 C 68.3 42.9 64.5 55.6 60.3 65.5" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 71.9 32.1 C 68.2 43.4 63.0 56.2 60.1 66.4" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 60.1 65.6 C 47.0 63.5 34.7 62.2 21.8 60.0" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 60.5 65.7 C 48.1 64.3 33.2 62.5 22.4 59.6" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 22.2 59.8 C 20.1 50.3 16.2 38.7 13.8 30.2" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 22.3 60.0 C 18.5 50.3 16.9 40.2 14.1 30.1" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 11.0 33.0 C 13.1 32.9 15.0 33.1 17.0 32.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 11.1 32.9 C 12.9 33.1 15.3 33.0 16.9 32.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 16.9 33.0 C 16.3 31.1 15.0 28.8 14.1 27.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 17.1 33.0 C 16.0 31.1 15.2 28.9 14.0 27.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 13.9 26.9 C 13.0 29.2 11.8 30.9 11.0 33.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 14.0 26.9 C 13.1 28.8 11.9 30.9 11.1 32.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 37.1 16.9 C 39.0 16.8 40.9 17.1 43.1 17.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 37.0 17.0 C 39.2 17.1 41.0 17.2 43.0 17.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 43.1 17.1 C 42.2 14.8 41.0 12.7 40.0 11.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 43.1 17.1 C 42.1 14.8 41.0 13.2 40.1 11.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 40.0 11.1 C 39.2 13.0 38.1 14.8 37.1 17.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 40.0 10.9 C 38.8 13.1 38.0 15.2 36.9 17.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 69.0 35.0 C 71.1 35.0 73.0 34.8 75.0 35.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 69.1 35.0 C 70.8 35.0 73.2 35.1 75.0 35.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 74.9 34.9 C 74.2 32.8 73.0 30.7 72.1 28.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 74.9 35.0 C 73.8 33.1 73.0 31.0 71.9 29.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 72.1 28.9 C 71.0 31.2 69.8 33.0 69.1 34.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 72.1 28.9 C 71.2 30.9 70.2 33.2 68.9 34.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 57.1 68.9 C 59.0 69.2 61.1 69.0 63.1 68.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 57.1 68.9 C 58.9 69.2 60.9 68.8 63.0 69.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 62.9 69.0 C 61.8 67.0 60.9 64.9 60.0 63.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 63.0 69.0 C 62.1 67.1 60.8 65.0 60.1 63.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 60.0 63.1 C 58.8 65.1 57.8 66.9 57.1 69.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 60.0 63.0 C 58.8 64.9 57.8 67.2 57.0 69.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 19.0 63.0 C 21.0 63.0 23.2 63.1 25.1 62.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 19.1 63.1 C 20.9 62.9 23.1 62.8 25.0 62.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 24.9 63.0 C 23.8 60.8 22.8 59.0 21.9 57.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 24.9 63.1 C 24.1 61.0 22.8 58.9 21.9 57.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 21.9 57.1 C 21.2 59.1 20.0 60.9 18.9 62.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 21.9 57.0 C 21.1 58.8 20.0 61.0 19.1 63.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><circle cx="32" cy="38" r="2.6" fill="#00698f"/><circle cx="50" cy="48" r="2.6" fill="#00698f"/><path d="M 44.6 28.3 Q 44.0 29.0 44.0 29.6 Q 43.2 29.7 42.8 30.4 Q 41.9 30.6 41.3 30.6 Q 40.8 30.6 40.1 29.8 Q 39.6 29.0 39.4 28.5 Q 39.3 27.4 39.7 27.0 Q 40.5 26.9 40.6 25.9 Q 41.6 26.0 41.9 25.4 Q 42.2 25.2 43.4 25.7 Q 43.6 26.5 44.4 26.8 Q 44.7 27.7 44.6 28.3 " fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 60.7 40.1 Q 60.6 40.5 60.1 41.5 Q 60.0 41.9 59.0 42.4 Q 58.5 42.0 57.5 42.5 Q 56.6 42.6 56.2 41.9 Q 55.4 41.2 55.4 40.6 Q 55.7 39.9 55.5 39.1 Q 56.4 38.5 56.4 37.9 Q 56.7 37.1 57.8 37.4 Q 58.6 37.2 59.2 37.8 Q 59.2 37.9 60.2 38.7 Q 60.9 39.1 60.6 40.1 " fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 32.6 52.7 Q 32.5 53.8 31.7 53.9 Q 30.8 53.9 30.4 54.6 Q 29.6 54.2 28.9 54.4 Q 28.1 53.9 27.9 53.4 Q 28.0 52.3 27.3 52.0 Q 27.4 50.8 27.8 50.6 Q 28.4 50.1 28.9 49.6 Q 29.4 49.4 30.3 49.4 Q 31.3 49.5 31.6 50.1 Q 32.1 50.5 32.5 51.2 Q 32.7 52.4 32.5 52.7 " fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 79.1 24.1 C 78.9 19.4 79.4 14.0 78.8 9.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 79.0 10.0 L 78.1 12.8 L 79.9 12.8 Z" fill="#9aa3af" stroke="none"/><text x="79" y="32" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing=".6" fill="#9aa3af">N</text><path d="M 9.6 77.9 C 17.9 78.6 25.6 77.7 34.3 78.0" fill="none" stroke="#9aa3af" stroke-width="0.8" stroke-linecap="round" opacity="0.92"/><path d="M 10.0 75.1 C 9.9 76.1 10.0 77.1 10.0 78.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 18.0 75.0 C 17.9 76.0 18.1 77.1 18.0 78.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 26.0 75.0 C 26.1 75.9 26.0 77.1 26.0 78.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 33.9 75.0 C 33.9 75.9 34.0 77.0 34.0 78.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/></svg>
+        <h1 style="margin-top:16px;max-width:14em">ONG e terceiro setor</h1>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:28px;max-width:38em">São 63 mil organizações a mais em dois anos, disputando o mesmo financiamento. Três números públicos, e o que nenhum deles mede.</p>
+    
+    <p style="margin-top:24px"><span class="atualizado">Atualizado em 30 de outubro de 2026</span></p>
+  </div>
+</section>
+
+<section class="faixa">
+  <div class="wrap">
+    <div class="bloco">
+      <h3>Mais organizações, e o Centro-Oeste na frente</h3>
+      <div class="bloco__grade">
+        <div><figure class="gr" style="margin-top:0">
+          <svg viewBox="0 0 360 188" role="img" aria-label="Crescimento no número de organizações da sociedade civil por região, de 2021 a 2023: Centro-Oeste 11%, Norte 9,9%, Sudeste 8,1%, Nordeste 7,1%, Sul 5,9%. Brasil: 7,8%.">
+          <line x1="237.8" y1="0" x2="237.8" y2="168" stroke="#6b7280" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="237.8" y="182" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#6b7280">Brasil 7,8%</text>
+          <line x1="100" y1="0" x2="100" y2="168" stroke="#111111" stroke-width="1"/>
+          <text x="100" y="182" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#6b7280">0</text>
+          <text x="92" y="25" text-anchor="end" font-family="Inter, sans-serif" font-size="12" fill="#374151">Centro-Oeste</text>
+          <line x1="100" y1="22" x2="294.3" y2="22" stroke="#00698f" stroke-width="2"/>
+          <circle cx="294.3" cy="22" r="5" fill="#00698f"/>
+          <text x="304.3" y="26" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" fill="#111111">11,0%</text>
+          <text x="92" y="59" text-anchor="end" font-family="Inter, sans-serif" font-size="12" fill="#374151">Norte</text>
+          <line x1="100" y1="56" x2="274.9" y2="56" stroke="#00698f" stroke-width="2"/>
+          <circle cx="274.9" cy="56" r="5" fill="#00698f"/>
+          <text x="284.9" y="60" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" fill="#111111">9,9%</text>
+          <text x="92" y="93" text-anchor="end" font-family="Inter, sans-serif" font-size="12" fill="#374151">Sudeste</text>
+          <line x1="100" y1="90" x2="243.1" y2="90" stroke="#00698f" stroke-width="2"/>
+          <circle cx="243.1" cy="90" r="5" fill="#00698f"/>
+          <text x="253.1" y="94" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" fill="#111111">8,1%</text>
+          <text x="92" y="127" text-anchor="end" font-family="Inter, sans-serif" font-size="12" fill="#374151">Nordeste</text>
+          <line x1="100" y1="124" x2="225.4" y2="124" stroke="#00698f" stroke-width="2"/>
+          <circle cx="225.4" cy="124" r="5" fill="#00698f"/>
+          <text x="235.4" y="128" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" fill="#111111">7,1%</text>
+          <text x="92" y="161" text-anchor="end" font-family="Inter, sans-serif" font-size="12" fill="#374151">Sul</text>
+          <line x1="100" y1="158" x2="204.2" y2="158" stroke="#00698f" stroke-width="2"/>
+          <circle cx="204.2" cy="158" r="5" fill="#00698f"/>
+          <text x="214.2" y="162" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" fill="#111111">5,9%</text>
+          </svg>
+          <figcaption>Crescimento de organizações por região, 2021 a 2023</figcaption>
+        </figure>
+        <p class="ficha"><b>Valor:</b> 879.326 OSCs ativas, contra 815.677 em 2021. Alta de 7,8%<br><b>Período:</b> versão 2023 do Mapa<br><b>Origem:</b> Mapa das OSCs, Ipea. Fonte principal: CNPJ<br><b>Base:</b> organizações da sociedade civil ativas no Brasil. A contagem varia conforme a metodologia</p></div>
+        <div><p>Cerca de 63 mil organizações da sociedade civil, as OSCs, a mais em dois anos. O Centro-Oeste cresceu 11%, o dobro do Sul. A contagem muda conforme a forma de contar. Por isso ela aparece sempre com a fonte e o ano: número redondo sem origem não sustenta conversa com financiador.</p><p class='impacto' style='margin-top:16px'><strong>Por que isso é importante para o marketing?</strong> mais organizações no mesmo edital. Quando todas passam a ter material institucional bem feito, ele para de diferenciar. O que diferencia passa a ser a prova do que mudou na vida de quem foi atendido.</p></div>
+      </div>
+    </div>
+<div class="bloco">
+      <h3>A maioria não tem um único empregado formal</h3>
+      <div class="bloco__grade">
+        <div><figure class="gr" style="margin-top:0">
+          <svg viewBox="0 0 360 192" role="img" aria-label="Gráfico de pizza: mais de 80% das organizações da sociedade civil não têm vínculo formal de trabalho.">
+          <path d="M 85 95 L 85.0 27.0 A 68 68 0 1 1 20.3 74.0 Z" fill="#00698f" stroke="#ffffff" stroke-width="2"/>
+          <path d="M 85 95 L 20.3 74.0 A 68 68 0 0 1 85.0 27.0 Z" fill="#e5e7eb" stroke="#ffffff" stroke-width="2"/>
+          <rect x="178" y="40" width="11" height="11" rx="2" fill="#00698f"/>
+          <text x="196" y="50" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" fill="#111111">mais de 80%</text>
+          <text x="196" y="67" font-family="Inter, sans-serif" font-size="11.5" fill="#6b7280">sem vínculo formal</text>
+          <rect x="178" y="86" width="11" height="11" rx="2" fill="#e5e7eb"/>
+          <text x="196" y="96" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" fill="#111111">o restante</text>
+          <text x="196" y="113" font-family="Inter, sans-serif" font-size="11.5" fill="#6b7280">com 2,5 mi de vínculos</text>
+          </svg>
+          <figcaption>Organizações com e sem empregado registrado</figcaption>
+        </figure>
+        <p class="ficha"><b>Valor:</b> mais de 80% das organizações sem empregado registrado · mais de 2,5 milhões de vínculos no setor<br><b>Período:</b> vínculos de 2024; relatório com dados até 23/05/2025<br><b>Origem:</b> Mapa das OSCs, Ipea, relatório estatístico<br><b>Base:</b> OSCs ativas no Brasil. O relatório publica “mais de 80%”, sem o decimal. A fatia do gráfico usa 80%</p></div>
+        <div><p>O setor emprega mais de 2,5 milhões de pessoas com carteira assinada. Mas esse emprego está concentrado numa minoria: mais de quatro em cada cinco organizações não têm nenhum empregado registrado. Duas finalidades, defesa de direitos e religião, respondem por seis em cada dez organizações do país.</p><p class='impacto' style='margin-top:16px'><strong>Por que isso é importante para o marketing?</strong> a maior parte do setor opera com equipe voluntária, e isso define o que é realista propor. Pesquisa que depende de entrevistador na rua não cabe nessa realidade. Pesquisa feita sobre a lista de beneficiários que a organização já tem, cabe. É por isso que ela é o ponto de partida aqui.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faixa faixa--cinza">
+  <div class="wrap">
+    <h2 style="max-width:20em">O que ainda não está medido neste setor</h2>
+    <div class="bloco__grade">
+      <figure class="porta" style="margin:0">
+        <svg viewBox="0 0 320 172" role="img" aria-label="Corrente da ONG: projeto e atendimento são medidos; o que mudou na vida do beneficiário e o relatório ao financiador, não.">
+          <line x1="13" y1="18" x2="13" y2="52" stroke="#00698f" stroke-width="2"/>
+          <line x1="13" y1="52" x2="13" y2="86" stroke="#00698f" stroke-width="2"/>
+          <line x1="13" y1="86" x2="13" y2="120" stroke="#d4d4d8" stroke-width="2" stroke-dasharray="3 4"/>
+          <line x1="13" y1="120" x2="13" y2="154" stroke="#d4d4d8" stroke-width="2" stroke-dasharray="3 4"/>
+          <circle cx="13" cy="18" r="5.5" fill="#00698f"/>
+          <text x="32" y="22.5" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111111">projeto</text>
+          <circle cx="13" cy="52" r="5.5" fill="#00698f"/>
+          <text x="32" y="56.5" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111111">atendimento</text>
+          <circle cx="13" cy="86" r="5" fill="#ffffff" stroke="#00698f" stroke-width="2"/>
+          <text x="32" y="90.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#374151">beneficiário</text>
+          <circle cx="13" cy="120" r="5" fill="#ffffff" stroke="#d4d4d8" stroke-width="2"/>
+          <text x="32" y="124.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#6b7280">o que mudou</text>
+          <circle cx="13" cy="154" r="5" fill="#ffffff" stroke="#d4d4d8" stroke-width="2"/>
+          <text x="32" y="158.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#6b7280">relatório ao financiador</text>
+          </svg>
+      </figure>
+      <div><p>Os números desta página contam quantas organizações existem e quantas pessoas elas empregam. Nenhum conta o que mudou na vida de quem foi atendido. <strong>Essa base só existe se cada projeto medir o seu</strong>, e só funciona se medir antes.</p><div class='vazio' style='margin-top:24px'><h4>O que o financiador vai perguntar</h4><p class='miudo' style='margin-top:10px'>Quantas pessoas foram atendidas, toda organização responde. O que mudou para elas é a pergunta seguinte, e é a que costuma não ter resposta, porque ninguém mediu no começo. Essa é a parte que se desenha antes de o projeto começar, e é barata quando a coleta é sobre a lista que a organização já tem.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="faixa">
+  <div class="wrap">
+    <div class="cta">
+      <div>
+        <h3>Quer esse recorte para a sua base, e não para o país?</h3>
+        <p style="margin-top:12px;max-width:38em">Tudo nesta página é dado público do setor. O que ele não diz é o que acontece dentro da sua organização, e essa parte é pesquisa, não levantamento. Antes de qualquer proposta, mandamos uma análise gravada da sua medição: um vídeo de até cinco minutos, que você assiste quando quiser e aplica sozinho se preferir.</p>
+        <p class="regua" style="margin-top:12px">Sem pressa e sem pressão.</p>
+      </div>
+      <div class="botoes">
+        <a class="btn btn--primario" href="https://wa.me/5561985993459?text=Oi%20Neftal%C3%AD%2C%20vi%20a%20p%C3%A1gina%20de%20ONG%20e%20queria%20receber%20o%20diagn%C3%B3stico." rel="noopener">Receber o diagnóstico</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="faixa faixa--escura">
+  <div class="wrap rodape">
+    <div class="rodape__grade">
+      <div>
+        <p class="marca" style="font-family:var(--display);font-weight:700;font-size:1.0625rem;letter-spacing:-.5px">Sáez Marketing</p>
+        <p style="margin-top:12px;max-width:32em">Medição e evidência para o mercado imobiliário, sindicato e ONG. O <strong style="color:var(--on-dark)">Quantitare</strong> é a marca da linha de pesquisa; contrato e nota saem pela Sáez Marketing.</p>
+      </div>
+      <div>
+        <h4>Levantamento</h4>
+        <ul class="lista-limpa" style="margin-top:16px">
+          <li><a href="construtora.html">Mercado imobiliário</a></li>
+          <li><a href="sindicato.html">Sindicato</a></li>
+          <li><a href="ong.html">ONG e terceiro setor</a></li>
+          <li><a href="index.html">Página inicial</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <ul class="lista-limpa" style="margin-top:16px">
+          <!-- TROCAR: WhatsApp, e-mail, cidade -->
+          <li><a href="https://wa.me/5561985993459" rel="noopener">WhatsApp (61) 98599-3459</a></li>
+          <li><a href="mailto:contato@exemplo.com.br">contato@exemplo.com.br</a></li>
+          <li>Cidade/UF</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rodape__linha">
+      <p>Sáez Marketing e Representações · CNPJ 31.743.926/0001-09</p>
+      <p>Dados públicos compilados, não pesquisa de campo. Cada número traz período, origem e base.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

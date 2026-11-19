@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mercado imobiliário | Levantamento Quantitare</title>
+<meta name="description" content="O setor vendeu mais unidades e faturou menos com elas. Três números públicos que mudam a conta do anúncio, e um que não existe.">
+<link rel="icon" href="assets/quantitare-simbolo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: faixas editoriais alternando branco → cinza-claro, container 1200px,
+   rodapé escuro fechando a página. Tokens do design-system/DESIGN.md. */
+:root{
+  --ink:#111111; --ink-active:#242424; --body:#374151; --muted:#6b7280; --muted-soft:#898989;
+  --hairline:#e5e7eb; --hairline-soft:#f3f4f6;
+  --canvas:#ffffff; --surface-soft:#f8f9fa; --surface-card:#f5f5f5; --surface-strong:#e5e7eb;
+  --surface-dark:#101010; --on-primary:#ffffff; --on-dark:#ffffff; --on-dark-soft:#a1a1aa;
+  --saez-azul:#1256D3; --ambar:#f59e0b; --ambar-texto:#b45309;
+  --q-violeta:#102694; --q-ciano:#009EDD; --q-aco:#3A5A8C;
+  --display:"Manrope","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-pill:9999px;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--body);
+  font-family:var(--sans);font-size:16px;line-height:1.5;
+  -webkit-font-smoothing:antialiased}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+h1,h2,h3,h4{font-family:var(--display);color:var(--ink);font-weight:700;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.25rem,6vw,4rem);line-height:1.05;letter-spacing:clamp(-2px,-.35vw,-.8px)}
+h2{font-size:clamp(1.75rem,4vw,3rem);line-height:1.1;letter-spacing:clamp(-1.5px,-.25vw,-.5px)}
+h3{font-size:clamp(1.35rem,2.5vw,2.25rem);line-height:1.15;letter-spacing:-1px}
+h4{font-family:var(--sans);font-size:1.125rem;font-weight:600;line-height:1.4;letter-spacing:0}
+p{margin:0}
+a{color:var(--ink)}
+img,svg{max-width:100%}
+.faixa{width:100%}
+.faixa--cinza{background:var(--surface-soft)}
+.faixa--escura{background:var(--surface-dark)}
+.wrap{max-width:1200px;margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:clamp(56px,9vw,96px)}
+.wrap--nav{padding-block:0}
+.eyebrow{font-size:.8125rem;font-weight:500;line-height:1.4;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted)}
+.lead{font-size:1.125rem;font-weight:600;color:var(--ink);line-height:1.4}
+.regua{font-size:.8125rem;font-weight:500;line-height:1.45;color:var(--muted)}
+.miudo{font-size:.875rem;line-height:1.5;color:var(--muted)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* Navegação */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
+  background:var(--canvas);border-bottom:1px solid var(--hairline)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);
+  z-index:21;background:var(--canvas)}
+.nav__inner{max-width:1200px;margin:0 auto;min-height:64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;align-items:center;gap:24px;flex-wrap:wrap;padding-block:12px}
+.marca{font-family:var(--display);font-weight:700;font-size:1.0625rem;letter-spacing:-.5px;
+  color:var(--ink);text-decoration:none;white-space:nowrap}
+.marca span{color:var(--muted-soft);font-weight:500}
+.nav__links{display:flex;gap:20px;flex-wrap:wrap;margin-left:auto;align-items:center}
+.nav__links a{font-size:.875rem;font-weight:500;color:var(--body);text-decoration:none}
+.nav__links a:hover{color:var(--ink)}
+.nav__links a.btn--primario{color:var(--on-primary)}
+.nav__links a.btn--primario:hover{color:var(--on-primary)}
+.nav__links a.btn--secundario{color:var(--ink)}
+@media (max-width:760px){.nav__links a:not(.btn){display:none}.marca span{display:none}
+  .nav__inner{gap:12px}.btn{padding:12px 16px}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:12px 20px;border-radius:var(--r-md);
+  font-family:var(--sans);font-size:.875rem;font-weight:600;line-height:1;
+  text-decoration:none;cursor:pointer;border:1px solid transparent}
+.btn--primario{background:var(--ink);color:var(--on-primary)}
+.btn--primario:hover{background:var(--ink-active)}
+.btn--secundario{background:var(--canvas);color:var(--ink);border-color:#8a8a8e}
+.btn--secundario:hover{border-color:var(--ink)}
+.btn--escuro-sec{background:transparent;color:var(--on-dark);border-color:#3f3f46}
+.btn--claro{background:var(--canvas);color:var(--ink)}
+.btn--ambar{background:var(--ambar);color:#111111;border-color:transparent}
+.btn--ambar:hover{background:#d98806}
+:is(a,button,summary):focus-visible{outline:2px solid var(--saez-azul);outline-offset:3px;border-radius:var(--r-sm)}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,48px);align-items:start}
+.hero>*{min-width:0}
+@media (max-width:980px){.hero{grid-template-columns:1fr}}
+.hero__texto>*+*{margin-top:24px}
+.hero__texto p{max-width:34em}
+.botoes{display:flex;gap:12px;flex-wrap:wrap}
+
+/* Cartões */
+.cartao{background:var(--surface-card);border-radius:var(--r-lg);padding:clamp(20px,3vw,32px)}
+.cartao--branco{background:var(--canvas);border:1px solid var(--hairline)}
+.cartao>*+*{margin-top:16px}
+.grade{display:grid;gap:24px}
+.grade--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grade--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:980px){.grade--3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){.grade--3,.grade--2{grid-template-columns:1fr}}
+.selo{display:inline-block;padding:4px 12px;border-radius:var(--r-pill);
+  background:var(--surface-strong);color:var(--ink);
+  font-size:.8125rem;font-weight:500;line-height:1.4}
+.selo--q{background:rgba(16,38,148,.08);color:var(--q-violeta)}
+
+/* Corrente quebrada */
+.corrente{font-family:var(--mono);font-size:.8125rem;line-height:1.9;color:var(--body);
+  background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-md);
+  padding:12px 14px;overflow-x:auto}
+.corrente b{color:var(--ink);font-weight:500}
+.corrente .ok{color:var(--muted-soft)}
+.corrente .nao{color:#b42318;font-weight:500}
+.citacao{border-left:2px solid var(--ink);padding-left:16px;font-size:1.0625rem;color:var(--ink)}
+.citacao--q{border-left-color:var(--q-violeta)}
+
+/* Tabelas */
+.tabela-rolagem{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;min-width:0}
+table{width:100%;border-collapse:collapse;font-size:.9375rem;min-width:440px}
+caption{text-align:left;font-size:.8125rem;font-weight:500;color:var(--muted);padding-bottom:12px}
+th,td{text-align:left;padding:12px 16px 12px 0;border-bottom:1px solid var(--hairline);vertical-align:top}
+th{font-weight:600;color:var(--ink);font-size:.8125rem;letter-spacing:.04em;text-transform:uppercase}
+td.v,th.v{text-align:right;padding-right:0;font-family:var(--mono);font-variant-numeric:tabular-nums}
+th.v{font-family:var(--sans)}
+tr:last-child td{border-bottom:0}
+
+/* Método: trilho em vez de cartão, na mesma linguagem da corrente */
+.trilho{display:grid;gap:clamp(24px,4vw,40px);grid-template-columns:repeat(3,minmax(0,1fr));
+  border-top:2px solid var(--surface-strong)}
+.trilho>*{position:relative;min-width:0;padding-top:36px}
+.trilho>*::before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;
+  border-radius:50%;background:var(--saez-azul)}
+.trilho>*>*+*{margin-top:12px}
+.trilho ul{margin:0;padding-left:20px;font-size:.9375rem}
+.trilho li+li{margin-top:8px}
+.trilho .arte{margin:0 0 18px}
+.trilho .arte svg{display:block;width:172px;max-width:100%;height:auto}
+.emblema{display:block;width:78px;height:auto;margin-bottom:18px}
+.trilho .fase-rotulo{font-size:.8125rem;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--saez-azul)}
+@media (max-width:860px){
+  .trilho{grid-template-columns:1fr;border-top:0;border-left:2px solid var(--surface-strong);
+    padding-left:28px;gap:40px}
+  .trilho>*{padding-top:0}
+  .trilho>*::before{top:5px;left:-35px}
+}
+
+/* Duas colunas separadas por fio, sem caixa */
+.dupla{display:grid;gap:clamp(32px,5vw,56px);grid-template-columns:repeat(2,minmax(0,1fr))}
+.dupla>*{min-width:0}
+.dupla>*+*{border-left:1px solid var(--hairline);padding-left:clamp(32px,5vw,56px)}
+.dupla h3,.dupla h4{margin-bottom:12px}
+@media (max-width:760px){
+  .dupla{grid-template-columns:1fr;gap:32px}
+  .dupla>*+*{border-left:0;border-top:1px solid var(--hairline);padding-left:0;padding-top:32px}
+}
+
+/* Quantitare */
+.q-cabeca{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.q-cabeca img{width:44px;height:44px}
+.q-nome{font-family:var(--display);font-weight:700;font-size:1.5rem;letter-spacing:-.5px;
+  color:var(--q-violeta)}
+
+/* Preço */
+.preco{font-family:var(--display);font-size:clamp(1.5rem,3vw,1.75rem);font-weight:700;
+  letter-spacing:-.5px;color:var(--ink)}
+
+/* CTA + rodapé */
+.cta{background:var(--surface-card);border-radius:var(--r-lg);padding:clamp(28px,5vw,48px);
+  display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.cta>div{min-width:0}
+.rodape{color:var(--on-dark-soft);font-size:.875rem}
+.rodape h4,.rodape .marca{color:var(--on-dark)}
+.rodape a{color:var(--on-dark-soft);text-decoration:none}
+.rodape a:hover{color:var(--on-dark)}
+.rodape__grade{display:grid;gap:32px;grid-template-columns:2fr 1fr 1fr 1fr}
+@media (max-width:980px){.rodape__grade{grid-template-columns:1fr 1fr}}
+@media (max-width:460px){.rodape__grade{grid-template-columns:1fr}}
+.rodape__linha{margin-top:40px;padding-top:24px;border-top:1px solid #27272a;
+  display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between;font-size:.8125rem}
+.lista-limpa{list-style:none;margin:0;padding:0}
+.lista-limpa li+li{margin-top:10px}
+/* Cor por setor: acompanha o setor, não decora o cartão */
+.selo--obra{background:rgba(18,86,211,.09);color:#1256D3}
+.selo--sind{background:rgba(16,38,148,.09);color:#102694}
+.selo--ong{background:rgba(0,158,221,.12);color:#00698f}
+.faixa--tinta{background:#f4f6fd}
+.porta figure{margin:0}
+.porta svg{display:block;width:100%;height:auto}
+
+/* Números gerais */
+.numeros{display:grid;gap:24px;grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:860px){.numeros{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.numero strong{display:block;font-family:var(--display);font-weight:700;color:var(--saez-azul);
+  font-size:clamp(1.75rem,3.5vw,2.5rem);line-height:1;letter-spacing:-1px}
+.numero .regua{margin-top:8px}
+
+/* Mercado: número grande + ficha técnica em mono, que é a assinatura da casa */
+.mercado{display:grid;gap:clamp(24px,4vw,40px);grid-template-columns:repeat(3,minmax(0,1fr))}
+.mercado>article{display:flex;flex-direction:column;min-width:0}
+.mercado>article>strong{display:block;margin-top:16px;font-family:var(--display);font-weight:700;
+  font-size:clamp(2.25rem,4.5vw,3rem);line-height:1;letter-spacing:-1.5px;color:var(--ink)}
+.mercado-frase{margin-top:10px;color:var(--body)}
+.data-dado{margin-top:12px;font-size:.8125rem;font-weight:500;color:var(--muted-soft)}
+.contexto{margin-top:16px;font-size:.9375rem;line-height:1.55;color:var(--body)}
+.impacto{margin-top:14px;font-size:.9375rem;line-height:1.5;color:var(--body)}
+.impacto strong{color:var(--ink);font-family:var(--sans);font-size:inherit;font-weight:600;letter-spacing:0}
+.mercado .miudo{margin-top:16px}
+.mercado .impacto:last-of-type{margin-bottom:22px}
+.mercado .btn{margin-top:auto;align-self:flex-start}
+.gr{margin:20px 0 0}
+.gr svg{display:block;width:100%;height:auto;max-width:400px}
+.gr figcaption{margin-top:10px;font-size:.75rem;color:var(--muted-soft)}
+.ficha{margin-top:16px;padding:12px 14px;background:var(--surface-card);
+  border-radius:var(--r-md);font-family:var(--mono);font-size:.75rem;line-height:1.7;
+  color:var(--muted)}
+.ficha b{color:var(--body);font-weight:500}
+.ficha a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+.ficha a:hover{color:var(--ink)}
+@media (max-width:860px){.mercado{grid-template-columns:1fr}}
+
+/* Modelo de relatório: a folha, não o painel */
+.folha{background:var(--canvas);border:1px solid var(--surface-strong);border-radius:var(--r-md);
+  padding:clamp(20px,3vw,32px);box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.folha__cab{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;
+  padding-bottom:16px;border-bottom:1px solid var(--hairline)}
+.folha__cab h4{margin:0}
+.folha__sel{font-family:var(--mono);font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);border:1px solid var(--hairline);border-radius:var(--r-pill);padding:3px 10px}
+.folha table{min-width:0;font-size:.875rem;margin-top:20px}
+.folha th,.folha td{padding:9px 12px 9px 0}
+.folha__com{margin-top:24px;padding-top:20px;border-top:1px solid var(--hairline)}
+.folha__com ol{margin:16px 0 0;padding-left:20px;font-size:.9375rem}
+.folha__com li+li{margin-top:10px}
+.folha__com li b{color:var(--ink)}
+.folha__assin{margin-top:20px;font-size:.875rem;color:var(--muted)}
+.faixa--azul{background:#eef3fd}
+/* Serviço: uma faixa horizontal por serviço, empilhadas */
+.servico{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(24px,4vw,48px);align-items:start}
+.servico+.servico{margin-top:clamp(40px,6vw,56px);padding-top:clamp(40px,6vw,56px);
+  border-top:1px solid var(--hairline)}
+@media (max-width:860px){.servico{grid-template-columns:1fr}}
+.rel-graficos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,32px);
+  margin-top:28px;padding-top:24px;border-top:1px solid var(--hairline)}
+@media (max-width:640px){.rel-graficos{grid-template-columns:1fr}}
+.rel-graficos h5{margin:0 0 10px;font-family:var(--sans);font-size:.8125rem;font-weight:600;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.rel-graficos svg{display:block;width:100%;max-width:300px;height:auto}
+.analise{margin-top:14px;font-size:.875rem;line-height:1.5;color:var(--body)}
+.analise b{display:block;font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted-soft);margin-bottom:3px}
+.tira{display:grid;gap:clamp(16px,2vw,24px);margin-top:20px}
+.tira--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tira--4{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:520px){.tira--3,.tira--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tira figure{margin:0;min-width:0}
+.tira svg{display:block;width:100%;height:auto}
+.tira figcaption{margin-top:8px;font-size:.8125rem;font-weight:600;color:var(--saez-azul)}
+.tira--q figcaption{color:var(--q-violeta)}
+.tira p{margin-top:2px;font-size:.8125rem;color:var(--muted);line-height:1.45}
+.marca-q{display:flex;align-items:center;gap:12px;margin-top:22px;padding-top:18px;
+  border-top:1px solid var(--hairline)}
+.marca-q img{width:44px;height:auto;flex:none}
+.marca-q p{font-size:.8125rem;line-height:1.5;color:var(--muted)}
+.marca-q b{display:block;font-family:var(--display);font-size:1rem;letter-spacing:-.3px;
+  color:var(--q-violeta)}
+.dado-setor{margin-top:14px;padding:10px 12px;background:var(--surface-soft);
+  border-radius:var(--r-md);font-size:.8125rem;line-height:1.5;color:var(--body)}
+.dado-setor b{font-family:var(--mono);font-weight:500;color:var(--ink)}
+.dado-setor span{display:block;margin-top:3px;font-size:.75rem;color:var(--muted-soft)}
+.q-simbolo{width:clamp(80px,9vw,112px);height:auto;flex:none}
+.q-faixa{display:flex;gap:clamp(24px,4vw,48px);align-items:center;flex-wrap:wrap}
+.q-faixa>div{min-width:0;flex:1 1 320px}
+
+.autor{display:flex;gap:clamp(20px,3vw,28px);align-items:center;flex-wrap:wrap;margin-top:24px}
+.autor img{width:clamp(104px,12vw,140px);height:auto;flex:none;border-radius:50%;
+  background:var(--canvas)}
+.autor p{min-width:0;flex:1 1 320px;max-width:40em}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+<style>
+.volta{font-size:.875rem;font-weight:500;color:var(--muted);text-decoration:none}
+.volta:hover{color:var(--ink)}
+.capa{display:flex;gap:clamp(20px,4vw,40px);align-items:center;flex-wrap:wrap}
+.capa>div{flex:1 1 320px;min-width:0}
+.selo-setor{display:inline-block;padding:4px 12px;border-radius:var(--r-pill);
+  font-size:.8125rem;font-weight:500}
+.bloco{border-top:1px solid var(--hairline);padding-top:clamp(28px,4vw,40px);
+  margin-top:clamp(28px,4vw,40px)}
+.bloco:first-of-type{border-top:0;padding-top:0;margin-top:clamp(28px,4vw,40px)}
+.bloco__grade{display:grid;gap:clamp(24px,4vw,48px);grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  align-items:start;margin-top:24px}
+@media (max-width:860px){.bloco__grade{grid-template-columns:1fr}}
+.atualizado{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;
+  border-radius:var(--r-pill);background:var(--surface-card);
+  font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.emblema-setor{display:block;width:84px;height:auto;margin-top:18px}
+.vazio{border:1px dashed var(--surface-strong);border-radius:var(--r-lg);
+  padding:clamp(20px,3vw,32px);background:transparent}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav__inner">
+    <a class="marca" href="index.html">Sáez Marketing <span>· medição e evidência</span></a>
+    <nav class="nav__links" aria-label="Seções">
+      <a class="volta" href="index.html#mercado">← Voltar ao levantamento</a>
+      <a class="btn btn--primario" href="https://wa.me/5561985993459?text=Oi%20Neftal%C3%AD%2C%20vi%20a%20p%C3%A1gina%20de%20mercado%20imobili%C3%A1rio%20e%20queria%20receber%20o%20diagn%C3%B3stico." rel="noopener">Receber o diagnóstico</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="faixa faixa--tinta">
+  <div class="wrap">
+    <div class="capa">
+      <img class="q-simbolo" src="assets/quantitare-simbolo.svg" alt="Símbolo do Quantitare" width="112" height="112">
+      <div>
+        <p class="q-nome">Levantamento Quantitare</p>
+        <span class="selo-setor" style="background:#1256D314;color:#1256D3;margin-top:10px">mercado imobiliário</span>
+        <svg class="emblema-setor" viewBox="0 0 86 86" role="img" aria-label="Planta de uma unidade com as cotas marcadas: paredes, divisória interna e a porta."><path d="M 9.8 14.5 C 30.8 14.3 50.0 15.0 69.8 13.6" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 10.2 14.4 C 30.6 13.5 51.1 14.0 69.7 13.6" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 69.7 14.1 C 69.9 29.2 70.7 43.6 70.1 58.4" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 69.8 14.1 C 69.2 29.1 69.2 43.3 69.6 58.5" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 69.7 57.5 C 50.7 58.4 28.7 56.9 9.7 58.2" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 70.2 58.1 C 50.4 58.8 30.3 57.5 10.1 58.0" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 10.0 58.1 C 10.8 44.5 10.2 29.1 10.5 13.7" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 9.6 57.9 C 10.7 43.8 10.6 27.7 9.7 13.6" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 13.7 17.8 C 30.2 18.0 48.7 18.8 66.2 17.9" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 13.8 18.2 C 32.2 17.3 48.9 17.0 65.9 18.1" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.45"/><path d="M 65.7 18.2 C 65.0 29.2 66.4 43.4 66.3 54.1" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 66.1 17.6 C 65.5 29.7 65.7 42.5 66.4 53.6" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.45"/><path d="M 65.6 53.8 C 48.7 54.2 30.0 54.4 14.5 53.6" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 66.4 54.0 C 48.5 54.4 31.7 54.6 13.8 53.6" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.45"/><path d="M 14.0 54.5 C 14.2 41.8 13.8 30.3 13.6 17.6" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 13.9 54.2 C 14.2 41.2 14.7 28.6 13.5 17.6" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.45"/><path d="M 44.1 17.7 C 44.4 30.2 43.1 41.9 44.1 53.5" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 43.9 17.5 C 43.7 30.0 43.8 41.7 43.6 54.2" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.45"/><path d="M 44.4 38.4 C 50.4 37.1 58.5 37.9 65.6 38.1" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 43.7 38.3 C 50.8 38.5 58.8 37.2 65.8 37.9" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.45"/><path d="M 24.0 53.9 C 24.1 55.4 24.0 56.8 24.1 58.0" fill="none" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 24 54 A 9 9 0 0 1 33 63" fill="none" stroke="#1256D3" stroke-width="1.1" opacity=".8"/><path d="M 10.0 60.1 C 10.3 65.8 10.0 71.3 10.3 76.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 69.7 60.1 C 70.5 65.7 69.7 70.9 70.2 76.2" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 9.6 72.2 C 29.1 73.0 50.3 73.1 69.7 72.4" fill="none" stroke="#9aa3af" stroke-width="0.8" stroke-linecap="round" opacity="0.92"/><path d="M 10.0 72.0 L 13.0 73.0 L 13.0 71.0 Z" fill="#9aa3af" stroke="none"/><path d="M 70.0 72.0 L 67.0 71.0 L 67.0 73.0 Z" fill="#9aa3af" stroke="none"/><path d="M 72.0 13.9 C 73.5 13.9 75.5 13.9 76.9 14.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 71.9 58.0 C 73.5 58.0 75.4 57.9 77.0 58.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 79.5 14.1 C 78.2 27.8 78.7 44.0 79.1 58.5" fill="none" stroke="#9aa3af" stroke-width="0.8" stroke-linecap="round" opacity="0.92"/><path d="M 79.0 14.0 L 78.0 17.0 L 80.0 17.0 Z" fill="#9aa3af" stroke="none"/><path d="M 79.0 58.0 L 80.0 55.0 L 78.0 55.0 Z" fill="#9aa3af" stroke="none"/></svg>
+        <h1 style="margin-top:16px;max-width:14em">Mercado imobiliário</h1>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:28px;max-width:38em">O setor vendeu mais unidades e faturou menos com elas. Três números públicos que mudam a conta do anúncio, e um que não existe.</p>
+    
+    <p style="margin-top:24px"><span class="atualizado">Atualizado em 30 de outubro de 2026</span></p>
+  </div>
+</section>
+
+<section class="faixa">
+  <div class="wrap">
+    <div class="bloco">
+      <h3>Vende-se mais unidade, por menos dinheiro</h3>
+      <div class="bloco__grade">
+        <div><figure class="gr" style="margin-top:0">
+          <svg viewBox="0 0 360 168" role="img" aria-label="Variação no 2º trimestre de 2026 contra o mesmo trimestre de 2025: unidades vendidas mais 5,3%, unidades lançadas menos 1,3%, valor geral de lançamentos menos 23,1%.">
+          <line x1="182" y1="14" x2="182" y2="146" stroke="#111111" stroke-width="1"/>
+          <text x="0" y="12" font-family="Inter, sans-serif" font-size="12" fill="#374151">Unidades vendidas · <tspan font-family="JetBrains Mono, monospace" font-weight="500" fill="#111111">+5,3%</tspan></text>
+          <rect x="182.0" y="20" width="36.7" height="16" rx="2" fill="#1256D3"/>
+          <text x="0" y="60" font-family="Inter, sans-serif" font-size="12" fill="#374151">Unidades lançadas · <tspan font-family="JetBrains Mono, monospace" font-weight="500" fill="#111111">−1,3%</tspan></text>
+          <rect x="173.0" y="68" width="9.0" height="16" rx="2" fill="#9aa3af"/>
+          <text x="0" y="108" font-family="Inter, sans-serif" font-size="12" fill="#374151">Valor lançado, o VGL · <tspan font-family="JetBrains Mono, monospace" font-weight="500" fill="#111111">−23,1%</tspan></text>
+          <rect x="22.0" y="116" width="160.0" height="16" rx="2" fill="#9aa3af"/>
+          <text x="182" y="160" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#6b7280">0</text>
+          </svg>
+          <figcaption>Variação do trimestre contra o mesmo trimestre de 2025</figcaption>
+        </figure>
+        <p class="ficha"><b>Valor:</b> 113.676 unidades vendidas · 107.161 lançadas · VGL de R$ 62,4 bi<br><b>Período:</b> 2º trimestre de 2026, contra o 2º de 2025<br><b>Origem:</b> CBIC / Brain, Indicadores Imobiliários Nacionais<br><b>Base:</b> imóveis residenciais em 221 cidades</p></div>
+        <div><p>As três barras contam a mesma coisa por ângulos diferentes. O setor lançou quase a mesma quantidade de imóveis de um ano atrás, e vendeu 5,3% a mais. Mas o valor somado dos lançamentos caiu 23,1%: o que está entrando no mercado é mais barato. No semestre foram 226.536 unidades vendidas, 5,4% a mais, e a oferta ao fim do trimestre era de 355.290 unidades. O Centro-Oeste foi a região que mais cresceu, 27,7%.</p><p class='impacto' style='margin-top:16px'><strong>Por que isso é importante para o marketing?</strong> imóvel mais barato deixa menos margem em cada venda. E quando a margem encolhe, encolhe junto o quanto a empresa pode gastar para conseguir um comprador. O anúncio que se pagava no ano passado pode não se pagar mais hoje, mesmo trazendo contato pelo mesmo preço. Quem acompanha só até o contato não enxerga isso. E com o Minha Casa Minha Vida em participação recorde, a maior parte do que se vende hoje está nessa faixa. Campanha desenhada para alto padrão está falando com a parte menor do mercado.</p></div>
+      </div>
+    </div>
+<div class="bloco">
+      <h3>O financiamento mudou de origem</h3>
+      <div class="bloco__grade">
+        <div><figure class="gr" style="margin-top:0">
+          <svg viewBox="0 0 360 86" role="img" aria-label="Imóveis financiados de janeiro a agosto de 2026: 384,6 mil pelo SBPE, alta de 35,9%, e 62,1 mil com recursos livres, queda de 35,5%.">
+          <line x1="112" y1="0" x2="112" y2="66" stroke="#111111" stroke-width="1"/>
+          <text x="112" y="80" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#6b7280">0</text>
+          <text x="104" y="25" text-anchor="end" font-family="Inter, sans-serif" font-size="12" fill="#374151">SBPE</text>
+          <rect x="112" y="14" width="174.0" height="16" rx="2" fill="#1256D3"/>
+          <text x="278.0" y="26" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" fill="#ffffff">384,6 mil  +35,9%</text>
+          <text x="104" y="59" text-anchor="end" font-family="Inter, sans-serif" font-size="12" fill="#374151">Recursos livres</text>
+          <rect x="112" y="48" width="28.1" height="16" rx="2" fill="#1256D3"/>
+          <text x="150.1" y="60" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" fill="#111111">62,1 mil  −35,5%</text>
+          </svg>
+          <figcaption>Imóveis financiados de janeiro a agosto de 2026</figcaption>
+        </figure>
+        <p class="ficha"><b>Valor:</b> 384,6 mil imóveis pelo SBPE (+35,9%) · 62,1 mil com recursos livres (−35,5%)<br><b>Período:</b> janeiro a agosto de 2026, contra igual período de 2025<br><b>Origem:</b> Abecip, Sistema Brasileiro de Poupança e Empréstimo<br><b>Base:</b> financiamentos habitacionais no país. Nos 12 meses até agosto: 559,2 mil unidades, +20,2%</p></div>
+        <div><p>O financiamento vem de duas origens: a poupança, com juro menor, e os recursos livres, com juro de mercado. Seis em cada sete imóveis financiados no período vieram da poupança, que cresceu 35,9%. A outra origem encolheu mais de um terço. Esse crédito sai do dinheiro depositado na poupança. E no mesmo período a poupança teve saída líquida de R$ 47,0 bilhões. Mais gente tirando do que pondo. É um crescimento para acompanhar, não para dar como garantido.</p><p class='impacto' style='margin-top:16px'><strong>Por que isso é importante para o marketing?</strong> o comprador que está conseguindo crédito hoje é o do SBPE e do programa, não o de recursos livres. Isso muda a faixa de renda do anúncio e a linguagem da peça. Muda principalmente a pergunta que o atendimento faz logo no começo: contato que não passa no crédito é contato que custou e não vira visita.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faixa faixa--cinza">
+  <div class="wrap">
+    <h2 style="max-width:20em">O que ainda não está medido neste setor</h2>
+    <div class="bloco__grade">
+      <figure class="porta" style="margin:0">
+        <svg viewBox="0 0 320 240" role="img" aria-label="Corrente da construtora: anúncio, clique e lead são medidos; visita ao estande, proposta e unidade vendida, não.">
+          <line x1="13" y1="18" x2="13" y2="52" stroke="#1256D3" stroke-width="2"/>
+          <line x1="13" y1="52" x2="13" y2="86" stroke="#1256D3" stroke-width="2"/>
+          <line x1="13" y1="86" x2="13" y2="120" stroke="#1256D3" stroke-width="2"/>
+          <line x1="13" y1="120" x2="13" y2="154" stroke="#d4d4d8" stroke-width="2" stroke-dasharray="3 4"/>
+          <line x1="13" y1="154" x2="13" y2="188" stroke="#d4d4d8" stroke-width="2" stroke-dasharray="3 4"/>
+          <line x1="13" y1="188" x2="13" y2="222" stroke="#d4d4d8" stroke-width="2" stroke-dasharray="3 4"/>
+          <circle cx="13" cy="18" r="5.5" fill="#1256D3"/>
+          <text x="32" y="22.5" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111111">anúncio</text>
+          <circle cx="13" cy="52" r="5.5" fill="#1256D3"/>
+          <text x="32" y="56.5" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111111">clique</text>
+          <circle cx="13" cy="86" r="5.5" fill="#1256D3"/>
+          <text x="32" y="90.5" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111111">lead</text>
+          <circle cx="13" cy="120" r="5" fill="#ffffff" stroke="#1256D3" stroke-width="2"/>
+          <text x="32" y="124.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#374151">atendimento</text>
+          <circle cx="13" cy="154" r="5" fill="#ffffff" stroke="#d4d4d8" stroke-width="2"/>
+          <text x="32" y="158.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#6b7280">visita ao estande</text>
+          <circle cx="13" cy="188" r="5" fill="#ffffff" stroke="#d4d4d8" stroke-width="2"/>
+          <text x="32" y="192.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#6b7280">proposta</text>
+          <circle cx="13" cy="222" r="5" fill="#ffffff" stroke="#d4d4d8" stroke-width="2"/>
+          <text x="32" y="226.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#6b7280">unidade vendida</text>
+          </svg>
+      </figure>
+      <div><p>Os números acima descrevem o país. O que eles não dizem é quantos dos seus contatos viraram visita ao estande, nem quantas unidades saíram com origem em campanha. <strong>Essa parte quase nunca está medida</strong>, e é a que decide se o anúncio se paga.</p><div class='vazio' style='margin-top:24px'><h4>E o número que não existe</h4><p class='miudo' style='margin-top:10px'>Quanto lead vira unidade vendida no Brasil? Não há fonte primária independente. O que circula vem de blog de fornecedor: 2% a 4%, 10% a 25%, 35% a 45%. Cada um mede uma etapa diferente com o mesmo nome, e nenhum conta como chegou lá. Um mercado de R$ 62,4 bilhões em lançamentos por trimestre, sem esse número público. É exatamente por isso que a sua própria série vale mais que qualquer referência de fora.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="faixa">
+  <div class="wrap">
+    <div class="cta">
+      <div>
+        <h3>Quer esse recorte para a sua base, e não para o país?</h3>
+        <p style="margin-top:12px;max-width:38em">Tudo nesta página é dado público do setor. O que ele não diz é o que acontece dentro da sua organização, e essa parte é pesquisa, não levantamento. Antes de qualquer proposta, mandamos uma análise gravada da sua medição: um vídeo de até cinco minutos, que você assiste quando quiser e aplica sozinho se preferir.</p>
+        <p class="regua" style="margin-top:12px">Sem pressa e sem pressão.</p>
+      </div>
+      <div class="botoes">
+        <a class="btn btn--primario" href="https://wa.me/5561985993459?text=Oi%20Neftal%C3%AD%2C%20vi%20a%20p%C3%A1gina%20de%20mercado%20imobili%C3%A1rio%20e%20queria%20receber%20o%20diagn%C3%B3stico." rel="noopener">Receber o diagnóstico</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="faixa faixa--escura">
+  <div class="wrap rodape">
+    <div class="rodape__grade">
+      <div>
+        <p class="marca" style="font-family:var(--display);font-weight:700;font-size:1.0625rem;letter-spacing:-.5px">Sáez Marketing</p>
+        <p style="margin-top:12px;max-width:32em">Medição e evidência para o mercado imobiliário, sindicato e ONG. O <strong style="color:var(--on-dark)">Quantitare</strong> é a marca da linha de pesquisa; contrato e nota saem pela Sáez Marketing.</p>
+      </div>
+      <div>
+        <h4>Levantamento</h4>
+        <ul class="lista-limpa" style="margin-top:16px">
+          <li><a href="construtora.html">Mercado imobiliário</a></li>
+          <li><a href="sindicato.html">Sindicato</a></li>
+          <li><a href="ong.html">ONG e terceiro setor</a></li>
+          <li><a href="index.html">Página inicial</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <ul class="lista-limpa" style="margin-top:16px">
+          <!-- TROCAR: WhatsApp, e-mail, cidade -->
+          <li><a href="https://wa.me/5561985993459" rel="noopener">WhatsApp (61) 98599-3459</a></li>
+          <li><a href="mailto:contato@exemplo.com.br">contato@exemplo.com.br</a></li>
+          <li>Cidade/UF</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rodape__linha">
+      <p>Sáez Marketing e Representações · CNPJ 31.743.926/0001-09</p>
+      <p>Dados públicos compilados, não pesquisa de campo. Cada número traz período, origem e base.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

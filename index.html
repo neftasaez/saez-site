@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sáez Marketing</title>
+<meta name="description" content="Medição e evidência para o mercado imobiliário, sindicato e ONG. Tráfego pago e pesquisa estatística como instrumentos: o número com a régua ao lado, e a causa dele.">
+<meta property="og:title" content="Sáez Marketing, medição e evidência">
+<meta property="og:description" content="Todo mundo mede o começo. Quase ninguém mede o fim. Tráfego pago e pesquisa estatística, com o número e a régua ao lado.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://saezmarketing.com/">
+<meta property="og:image" content="https://saezmarketing.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://saezmarketing.com/">
+<link rel="icon" href="assets/quantitare-simbolo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: faixas editoriais alternando branco → cinza-claro, container 1200px,
+   rodapé escuro fechando a página. Tokens do design-system/DESIGN.md. */
+:root{
+  --ink:#111111; --ink-active:#242424; --body:#374151; --muted:#6b7280; --muted-soft:#898989;
+  --hairline:#e5e7eb; --hairline-soft:#f3f4f6;
+  --canvas:#ffffff; --surface-soft:#f8f9fa; --surface-card:#f5f5f5; --surface-strong:#e5e7eb;
+  --surface-dark:#101010; --on-primary:#ffffff; --on-dark:#ffffff; --on-dark-soft:#a1a1aa;
+  --saez-azul:#1256D3; --ambar:#f59e0b; --ambar-texto:#b45309;
+  --q-violeta:#102694; --q-ciano:#009EDD; --q-aco:#3A5A8C;
+  --display:"Manrope","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-pill:9999px;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--body);
+  font-family:var(--sans);font-size:16px;line-height:1.5;
+  -webkit-font-smoothing:antialiased}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+h1,h2,h3,h4{font-family:var(--display);color:var(--ink);font-weight:700;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.25rem,6vw,4rem);line-height:1.05;letter-spacing:clamp(-2px,-.35vw,-.8px)}
+h2{font-size:clamp(1.75rem,4vw,3rem);line-height:1.1;letter-spacing:clamp(-1.5px,-.25vw,-.5px)}
+h3{font-size:clamp(1.35rem,2.5vw,2.25rem);line-height:1.15;letter-spacing:-1px}
+h4{font-family:var(--sans);font-size:1.125rem;font-weight:600;line-height:1.4;letter-spacing:0}
+p{margin:0}
+a{color:var(--ink)}
+img,svg{max-width:100%}
+.faixa{width:100%}
+.faixa--cinza{background:var(--surface-soft)}
+.faixa--escura{background:var(--surface-dark)}
+.wrap{max-width:1200px;margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:clamp(56px,9vw,96px)}
+.wrap--nav{padding-block:0}
+.eyebrow{font-size:.8125rem;font-weight:500;line-height:1.4;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted)}
+.lead{font-size:1.125rem;font-weight:600;color:var(--ink);line-height:1.4}
+.regua{font-size:.8125rem;font-weight:500;line-height:1.45;color:var(--muted)}
+.miudo{font-size:.875rem;line-height:1.5;color:var(--muted)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* Navegação */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
+  background:var(--canvas);border-bottom:1px solid var(--hairline)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);
+  z-index:21;background:var(--canvas)}
+.nav__inner{max-width:1200px;margin:0 auto;min-height:64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;align-items:center;gap:24px;flex-wrap:wrap;padding-block:12px}
+.marca{font-family:var(--display);font-weight:700;font-size:1.0625rem;letter-spacing:-.5px;
+  color:var(--ink);text-decoration:none;white-space:nowrap}
+.marca span{color:var(--muted-soft);font-weight:500}
+.nav__links{display:flex;gap:20px;flex-wrap:wrap;margin-left:auto;align-items:center}
+.nav__links a{font-size:.875rem;font-weight:500;color:var(--body);text-decoration:none}
+.nav__links a:hover{color:var(--ink)}
+.nav__links a.btn--primario{color:var(--on-primary)}
+.nav__links a.btn--primario:hover{color:var(--on-primary)}
+.nav__links a.btn--secundario{color:var(--ink)}
+@media (max-width:760px){.nav__links a:not(.btn){display:none}.marca span{display:none}
+  .nav__inner{gap:12px}.btn{padding:12px 16px}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:12px 20px;border-radius:var(--r-md);
+  font-family:var(--sans);font-size:.875rem;font-weight:600;line-height:1;
+  text-decoration:none;cursor:pointer;border:1px solid transparent}
+.btn--primario{background:var(--ink);color:var(--on-primary)}
+.btn--primario:hover{background:var(--ink-active)}
+.btn--secundario{background:var(--canvas);color:var(--ink);border-color:#8a8a8e}
+.btn--secundario:hover{border-color:var(--ink)}
+.btn--escuro-sec{background:transparent;color:var(--on-dark);border-color:#3f3f46}
+.btn--claro{background:var(--canvas);color:var(--ink)}
+.btn--ambar{background:var(--ambar);color:#111111;border-color:transparent}
+.btn--ambar:hover{background:#d98806}
+:is(a,button,summary):focus-visible{outline:2px solid var(--saez-azul);outline-offset:3px;border-radius:var(--r-sm)}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,48px);align-items:start}
+.hero>*{min-width:0}
+@media (max-width:980px){.hero{grid-template-columns:1fr}}
+.hero__texto>*+*{margin-top:24px}
+.hero__texto p{max-width:34em}
+.botoes{display:flex;gap:12px;flex-wrap:wrap}
+
+/* Cartões */
+.cartao{background:var(--surface-card);border-radius:var(--r-lg);padding:clamp(20px,3vw,32px)}
+.cartao--branco{background:var(--canvas);border:1px solid var(--hairline)}
+.cartao>*+*{margin-top:16px}
+.grade{display:grid;gap:24px}
+.grade--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grade--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:980px){.grade--3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){.grade--3,.grade--2{grid-template-columns:1fr}}
+.selo{display:inline-block;padding:4px 12px;border-radius:var(--r-pill);
+  background:var(--surface-strong);color:var(--ink);
+  font-size:.8125rem;font-weight:500;line-height:1.4}
+.selo--q{background:rgba(16,38,148,.08);color:var(--q-violeta)}
+
+/* Corrente quebrada */
+.corrente{font-family:var(--mono);font-size:.8125rem;line-height:1.9;color:var(--body);
+  background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-md);
+  padding:12px 14px;overflow-x:auto}
+.corrente b{color:var(--ink);font-weight:500}
+.corrente .ok{color:var(--muted-soft)}
+.corrente .nao{color:#b42318;font-weight:500}
+.citacao{border-left:2px solid var(--ink);padding-left:16px;font-size:1.0625rem;color:var(--ink)}
+.citacao--q{border-left-color:var(--q-violeta)}
+
+/* Tabelas */
+.tabela-rolagem{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;min-width:0}
+table{width:100%;border-collapse:collapse;font-size:.9375rem;min-width:440px}
+caption{text-align:left;font-size:.8125rem;font-weight:500;color:var(--muted);padding-bottom:12px}
+th,td{text-align:left;padding:12px 16px 12px 0;border-bottom:1px solid var(--hairline);vertical-align:top}
+th{font-weight:600;color:var(--ink);font-size:.8125rem;letter-spacing:.04em;text-transform:uppercase}
+td.v,th.v{text-align:right;padding-right:0;font-family:var(--mono);font-variant-numeric:tabular-nums}
+th.v{font-family:var(--sans)}
+tr:last-child td{border-bottom:0}
+
+/* Método: trilho em vez de cartão, na mesma linguagem da corrente */
+.trilho{display:grid;gap:clamp(24px,4vw,40px);grid-template-columns:repeat(3,minmax(0,1fr));
+  border-top:2px solid var(--surface-strong)}
+.trilho>*{position:relative;min-width:0;padding-top:36px}
+.trilho>*::before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;
+  border-radius:50%;background:var(--saez-azul)}
+.trilho>*>*+*{margin-top:12px}
+.trilho ul{margin:0;padding-left:20px;font-size:.9375rem}
+.trilho li+li{margin-top:8px}
+.trilho .arte{margin:0 0 18px}
+.trilho .arte svg{display:block;width:172px;max-width:100%;height:auto}
+.emblema{display:block;width:78px;height:auto;margin-bottom:18px}
+.trilho .fase-rotulo{font-size:.8125rem;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--saez-azul)}
+@media (max-width:860px){
+  .trilho{grid-template-columns:1fr;border-top:0;border-left:2px solid var(--surface-strong);
+    padding-left:28px;gap:40px}
+  .trilho>*{padding-top:0}
+  .trilho>*::before{top:5px;left:-35px}
+}
+
+/* Duas colunas separadas por fio, sem caixa */
+.dupla{display:grid;gap:clamp(32px,5vw,56px);grid-template-columns:repeat(2,minmax(0,1fr))}
+.dupla>*{min-width:0}
+.dupla>*+*{border-left:1px solid var(--hairline);padding-left:clamp(32px,5vw,56px)}
+.dupla h3,.dupla h4{margin-bottom:12px}
+@media (max-width:760px){
+  .dupla{grid-template-columns:1fr;gap:32px}
+  .dupla>*+*{border-left:0;border-top:1px solid var(--hairline);padding-left:0;padding-top:32px}
+}
+
+/* Quantitare */
+.q-cabeca{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.q-cabeca img{width:44px;height:44px}
+.q-nome{font-family:var(--display);font-weight:700;font-size:1.5rem;letter-spacing:-.5px;
+  color:var(--q-violeta)}
+
+/* Preço */
+.preco{font-family:var(--display);font-size:clamp(1.5rem,3vw,1.75rem);font-weight:700;
+  letter-spacing:-.5px;color:var(--ink)}
+
+/* CTA + rodapé */
+.cta{background:var(--surface-card);border-radius:var(--r-lg);padding:clamp(28px,5vw,48px);
+  display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.cta>div{min-width:0}
+.rodape{color:var(--on-dark-soft);font-size:.875rem}
+.rodape h4,.rodape .marca{color:var(--on-dark)}
+.rodape a{color:var(--on-dark-soft);text-decoration:none}
+.rodape a:hover{color:var(--on-dark)}
+.rodape__grade{display:grid;gap:32px;grid-template-columns:2fr 1fr 1fr 1fr}
+@media (max-width:980px){.rodape__grade{grid-template-columns:1fr 1fr}}
+@media (max-width:460px){.rodape__grade{grid-template-columns:1fr}}
+.rodape__linha{margin-top:40px;padding-top:24px;border-top:1px solid #27272a;
+  display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between;font-size:.8125rem}
+.lista-limpa{list-style:none;margin:0;padding:0}
+.lista-limpa li+li{margin-top:10px}
+/* Cor por setor: acompanha o setor, não decora o cartão */
+.selo--obra{background:rgba(18,86,211,.09);color:#1256D3}
+.selo--sind{background:rgba(16,38,148,.09);color:#102694}
+.selo--ong{background:rgba(0,158,221,.12);color:#00698f}
+.faixa--tinta{background:#f4f6fd}
+.porta figure{margin:0}
+.porta svg{display:block;width:100%;height:auto}
+
+/* Números gerais */
+.numeros{display:grid;gap:24px;grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:860px){.numeros{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.numero strong{display:block;font-family:var(--display);font-weight:700;color:var(--saez-azul);
+  font-size:clamp(1.75rem,3.5vw,2.5rem);line-height:1;letter-spacing:-1px}
+.numero .regua{margin-top:8px}
+
+/* Mercado: número grande + ficha técnica em mono, que é a assinatura da casa */
+.mercado{display:grid;gap:clamp(24px,4vw,40px);grid-template-columns:repeat(3,minmax(0,1fr))}
+.mercado>article{display:flex;flex-direction:column;min-width:0}
+.mercado>article>strong{display:block;margin-top:16px;font-family:var(--display);font-weight:700;
+  font-size:clamp(2.25rem,4.5vw,3rem);line-height:1;letter-spacing:-1.5px;color:var(--ink)}
+.mercado-frase{margin-top:10px;color:var(--body)}
+.data-dado{margin-top:12px;font-size:.8125rem;font-weight:500;color:var(--muted-soft)}
+.contexto{margin-top:16px;font-size:.9375rem;line-height:1.55;color:var(--body)}
+.impacto{margin-top:14px;font-size:.9375rem;line-height:1.5;color:var(--body)}
+.impacto strong{color:var(--ink);font-family:var(--sans);font-size:inherit;font-weight:600;letter-spacing:0}
+.mercado .miudo{margin-top:16px}
+.mercado .impacto:last-of-type{margin-bottom:22px}
+.mercado .btn{margin-top:auto;align-self:flex-start}
+.gr{margin:20px 0 0}
+.gr svg{display:block;width:100%;height:auto;max-width:400px}
+.gr figcaption{margin-top:10px;font-size:.75rem;color:var(--muted-soft)}
+.ficha{margin-top:16px;padding:12px 14px;background:var(--surface-card);
+  border-radius:var(--r-md);font-family:var(--mono);font-size:.75rem;line-height:1.7;
+  color:var(--muted)}
+.ficha b{color:var(--body);font-weight:500}
+.ficha a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+.ficha a:hover{color:var(--ink)}
+@media (max-width:860px){.mercado{grid-template-columns:1fr}}
+
+/* Modelo de relatório: a folha, não o painel */
+.folha{background:var(--canvas);border:1px solid var(--surface-strong);border-radius:var(--r-md);
+  padding:clamp(20px,3vw,32px);box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.folha__cab{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;
+  padding-bottom:16px;border-bottom:1px solid var(--hairline)}
+.folha__cab h4{margin:0}
+.folha__sel{font-family:var(--mono);font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);border:1px solid var(--hairline);border-radius:var(--r-pill);padding:3px 10px}
+.folha table{min-width:0;font-size:.875rem;margin-top:20px}
+.folha th,.folha td{padding:9px 12px 9px 0}
+.folha__com{margin-top:24px;padding-top:20px;border-top:1px solid var(--hairline)}
+.folha__com ol{margin:16px 0 0;padding-left:20px;font-size:.9375rem}
+.folha__com li+li{margin-top:10px}
+.folha__com li b{color:var(--ink)}
+.folha__assin{margin-top:20px;font-size:.875rem;color:var(--muted)}
+.faixa--azul{background:#eef3fd}
+/* Serviço: uma faixa horizontal por serviço, empilhadas */
+.servico{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(24px,4vw,48px);align-items:start}
+.servico+.servico{margin-top:clamp(40px,6vw,56px);padding-top:clamp(40px,6vw,56px);
+  border-top:1px solid var(--hairline)}
+@media (max-width:860px){.servico{grid-template-columns:1fr}}
+.rel-graficos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,32px);
+  margin-top:28px;padding-top:24px;border-top:1px solid var(--hairline)}
+@media (max-width:640px){.rel-graficos{grid-template-columns:1fr}}
+.rel-graficos h5{margin:0 0 10px;font-family:var(--sans);font-size:.8125rem;font-weight:600;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.rel-graficos svg{display:block;width:100%;max-width:300px;height:auto}
+.analise{margin-top:14px;font-size:.875rem;line-height:1.5;color:var(--body)}
+.analise b{display:block;font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted-soft);margin-bottom:3px}
+.tira{display:grid;gap:clamp(16px,2vw,24px);margin-top:20px}
+.tira--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tira--4{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:520px){.tira--3,.tira--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tira figure{margin:0;min-width:0}
+.tira svg{display:block;width:100%;height:auto}
+.tira figcaption{margin-top:8px;font-size:.8125rem;font-weight:600;color:var(--saez-azul)}
+.tira--q figcaption{color:var(--q-violeta)}
+.tira p{margin-top:2px;font-size:.8125rem;color:var(--muted);line-height:1.45}
+.marca-q{display:flex;align-items:center;gap:12px;margin-top:22px;padding-top:18px;
+  border-top:1px solid var(--hairline)}
+.marca-q img{width:44px;height:auto;flex:none}
+.marca-q p{font-size:.8125rem;line-height:1.5;color:var(--muted)}
+.marca-q b{display:block;font-family:var(--display);font-size:1rem;letter-spacing:-.3px;
+  color:var(--q-violeta)}
+.dado-setor{margin-top:14px;padding:10px 12px;background:var(--surface-soft);
+  border-radius:var(--r-md);font-size:.8125rem;line-height:1.5;color:var(--body)}
+.dado-setor b{font-family:var(--mono);font-weight:500;color:var(--ink)}
+.dado-setor span{display:block;margin-top:3px;font-size:.75rem;color:var(--muted-soft)}
+.q-simbolo{width:clamp(80px,9vw,112px);height:auto;flex:none}
+.q-faixa{display:flex;gap:clamp(24px,4vw,48px);align-items:center;flex-wrap:wrap}
+.q-faixa>div{min-width:0;flex:1 1 320px}
+
+.autor{display:flex;gap:clamp(20px,3vw,28px);align-items:center;flex-wrap:wrap;margin-top:24px}
+.autor img{width:clamp(104px,12vw,140px);height:auto;flex:none;border-radius:50%;
+  background:var(--canvas)}
+.autor p{min-width:0;flex:1 1 320px;max-width:40em}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="nav__inner">
+    <a class="marca" href="#topo">Sáez Marketing <span>· medição e evidência</span></a>
+    <nav class="nav__links" aria-label="Seções">
+      <a href="#servicos">Serviços</a>
+      <a href="#portas">Para quem</a>
+      <a href="#mercado">O mercado</a>
+      <a href="#prova">A prova</a>
+      <a href="#preco">Como cobramos</a>
+      <a class="btn btn--primario" href="https://wa.me/5561985993459?text=Oi%20Neftal%C3%AD%2C%20vi%20o%20site%20e%20queria%20receber%20o%20diagn%C3%B3stico." rel="noopener">Receber o diagnóstico</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<main id="topo">
+<section class="faixa">
+  <div class="wrap hero">
+    <div class="hero__texto">
+      <h1>Todo mundo mede o começo. Quase ninguém mede o fim.</h1>
+      <p class="lead">Você sabe quanto investiu em anúncio no mês passado? Sabe quantas vendas aquele anúncio trouxe?</p>
+      <p>Quase ninguém sabe, e tudo bem: a contagem para no meio do caminho. Fazemos duas coisas, tráfego pago e pesquisa estatística. As duas servem a um fim só: entregar o número com a referência ao lado e a causa dele escrita.</p>
+      <div class="botoes">
+        <a class="btn btn--primario" href="https://wa.me/5561985993459?text=Oi%20Neftal%C3%AD%2C%20cheguei%20pelo%20site%20e%20queria%20receber%20o%20diagn%C3%B3stico." rel="noopener">Receber o diagnóstico</a>
+        <a class="btn btn--secundario" href="#servicos">Ver os serviços</a>
+      </div>
+      <p class="regua" style="margin-top:16px">Olhamos os seus canais e gravamos um vídeo de até cinco minutos com o que achamos. Sem compromisso nenhum de contratar.</p>
+    </div>
+
+    <figure class="cartao cartao--branco" style="margin:0">
+      <figcaption>
+        <h4>O que mudou numa empresa do setor imobiliário, medindo</h4>
+        <p class="regua" style="margin-top:8px">Mesma empresa, mesma campanha de pesquisa no Google.</p>
+      </figcaption>
+      <div style="margin-top:24px"><svg viewBox="0 0 440 180" role="img"
+             aria-label="Custo por lead de R$ 15,70 em setembro de 2023 para R$ 3,18 em abril de 2026, e leads no mês de 19 para 104."
+             style="width:100%;height:auto;display:block;overflow:visible">
+          <text x="0" y="12" font-family="Inter, sans-serif" font-size="12" font-weight="600"
+            letter-spacing="0.06em" fill="#6b7280">CUSTO POR LEAD</text>
+          <text x="0" y="42" font-family="Inter, sans-serif" font-size="12" fill="#6b7280">set/2023</text>
+          <rect x="62" y="30" width="300" height="20" rx="3" fill="#FCD9A0"/>
+          <text x="370" y="44" font-family="JetBrains Mono, monospace" font-size="13" fill="#374151">R$ 15,70</text>
+          <text x="0" y="72" font-family="Inter, sans-serif" font-size="12" fill="#111111" font-weight="600">abr/2026</text>
+          <rect x="62" y="60" width="61" height="20" rx="3" fill="#1256D3"/>
+          <text x="131" y="74" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" fill="#111111">R$ 3,18</text>
+          <text x="0" y="112" font-family="Inter, sans-serif" font-size="12" font-weight="600"
+            letter-spacing="0.06em" fill="#6b7280">LEADS NO MÊS</text>
+          <text x="0" y="142" font-family="Inter, sans-serif" font-size="12" fill="#6b7280">set/2023</text>
+          <rect x="62" y="130" width="55" height="20" rx="3" fill="#FCD9A0"/>
+          <text x="125" y="144" font-family="JetBrains Mono, monospace" font-size="13" fill="#374151">19</text>
+          <text x="0" y="172" font-family="Inter, sans-serif" font-size="12" fill="#111111" font-weight="600">abr/2026</text>
+          <rect x="62" y="160" width="300" height="20" rx="3" fill="#1256D3"/>
+          <text x="370" y="174" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" fill="#111111">104</text>
+        </svg></div>
+      <p class="regua" style="margin-top:28px">Custo por lead é quanto custou cada contato interessado que o anúncio trouxe. <strong>Não é promessa para o seu caso.</strong></p>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= OS DOIS SERVIÇOS ================= -->
+<section class="faixa faixa--cinza" id="servicos">
+  <div class="wrap">
+    <h2 style="max-width:20em">Dois serviços, um objetivo: medir até o fim.</h2>
+    <p style="margin-top:16px;max-width:38em">Um resolve a falta de contato chegando. O outro resolve a falta de informação para decidir. Dá para contratar só um, e a maioria começa assim.</p>
+
+    <div style="margin-top:48px">
+      <div class="servico">
+        <div>
+          <svg class="emblema" viewBox="0 0 86 86" role="img" aria-label="Uma régua graduada, com a sua própria medida cotada abaixo: todo número vem com a referência ao lado."><path d="M 9.9 33.8 C 32.4 33.5 55.3 35.0 76.1 33.9" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 9.8 34.2 C 32.1 34.1 55.3 34.0 75.9 33.9" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 76.1 34.3 C 76.7 40.8 76.3 48.3 75.7 53.6" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 76.3 34.3 C 75.6 41.4 75.4 47.5 75.7 53.9" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 75.6 54.3 C 54.9 53.8 31.1 53.6 10.0 54.4" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 76.5 54.0 C 53.3 55.0 31.4 54.4 9.7 54.3" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 9.6 54.3 C 9.5 46.9 9.3 40.0 10.3 34.0" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 10.4 53.7 C 9.7 48.1 10.4 40.3 9.7 34.3" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 16.0 34.2 C 15.7 37.3 15.8 41.0 16.1 43.9" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 22.0 34.1 C 22.2 36.0 22.0 38.1 22.1 40.1" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 28.2 33.9 C 27.6 37.4 28.2 40.9 28.0 44.0" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 34.0 34.1 C 34.2 36.0 34.0 38.3 34.1 40.0" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 40.1 34.0 C 40.0 37.7 39.8 40.5 40.0 44.1" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 45.9 34.1 C 45.9 36.0 46.1 37.9 46.1 39.9" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 51.9 34.0 C 52.2 37.4 52.3 41.1 52.1 44.1" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 57.9 34.0 C 57.9 36.2 58.2 37.9 58.1 40.0" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 64.1 33.9 C 64.2 37.0 63.8 40.7 64.1 43.9" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 70.0 33.9 C 70.1 36.1 70.2 38.0 70.1 40.0" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 10.3 53.8 C 10.6 59.8 10.6 65.4 10.1 69.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 76.0 54.0 C 75.6 59.2 76.0 65.4 75.8 70.2" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 9.8 66.0 C 32.3 66.3 55.7 66.9 76.3 66.2" fill="none" stroke="#9aa3af" stroke-width="0.8" stroke-linecap="round" opacity="0.92"/><path d="M 10.0 66.0 L 13.0 67.0 L 13.0 65.0 Z" fill="#9aa3af" stroke="none"/><path d="M 76.0 66.0 L 73.0 65.0 L 73.0 67.0 Z" fill="#9aa3af" stroke="none"/></svg>
+          <h3>Tráfego pago e medição</h3>
+          <p>Para a empresa que precisa de mais gente chegando e quer saber qual anúncio trouxe cada contato. Montamos a campanha, o atendimento que responde na hora e o rastreamento que liga o contato à venda.</p>
+          <ul class="lista-limpa miudo" style="margin-top:18px">
+            <li>Rastreamento conferido na ponta de chegada</li>
+            <li>Campanha no Google e no Meta, com criativos e página</li>
+            <li>Objetivo escolhido com você: lead, seguidor novo ou conversa iniciada</li>
+            <li>Atendimento automatizado, para responder o contato na hora em que ele chega</li>
+            <li>Relatório mensal com a causa de cada número, e reunião</li>
+            <li><strong>As contas de anúncio ficam no seu nome</strong></li>
+          </ul>
+        </div>
+        <div>
+          <p class="regua"><strong>Método Concêntrico:</strong> começa pequeno, num ponto onde dá para medir, e só então amplia.</p>
+          <div class="tira tira--3">
+            <figure><svg viewBox="0 0 170 132" role="img" aria-label="Prancha técnica: uma gota suspensa sobre o nível d'água, com a fundação em corte hachurado abaixo e a altura cotada."><path d="M 85 6 L 85 124" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-dasharray="7 2.5 1.5 2.5" opacity=".9"/><path d="M 88.1 27.5 Q 89.8 28.4 91.0 29.6 Q 92.2 30.7 93.5 32.2 Q 94.0 33.9 94.3 35.8 Q 93.6 37.5 93.4 39.3 Q 92.3 40.5 91.5 42.4 Q 90.2 43.4 88.4 44.1 Q 86.8 44.8 85.0 44.8 Q 83.2 44.4 81.6 44.2 Q 79.9 43.2 78.5 42.4 Q 77.8 40.4 76.8 39.2 Q 76.2 37.5 75.7 35.8 Q 76.2 33.7 77.1 32.4 Q 78.2 30.6 79.0 29.6 Q 80.6 28.4 82.0 27.8 " fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 88.1 27.5 Q 89.3 28.4 91.0 29.5 Q 92.1 31.2 93.4 32.2 Q 93.7 33.6 94.2 35.8 Q 94.1 37.8 93.5 39.3 Q 92.2 40.9 91.2 42.0 Q 90.2 43.0 88.4 44.1 Q 86.8 44.5 85.0 44.9 Q 83.2 44.8 81.4 44.6 Q 80.2 43.8 78.5 42.4 Q 77.9 40.5 76.6 39.3 Q 76.5 37.2 75.9 35.8 Q 76.2 33.8 77.1 32.4 Q 77.6 30.8 78.8 29.3 Q 80.0 28.3 81.9 27.4 " fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 85.1 20.1 C 83.9 22.6 83.1 24.8 82.0 27.5" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 84.9 20.1 C 83.9 22.6 83.1 25.2 81.8 27.6" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 85.1 20.0 C 86.0 22.3 87.1 24.9 88.2 27.5" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 85.0 19.9 C 86.3 22.3 87.2 25.1 87.9 27.6" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 18.4 79.7 C 62.0 80.3 108.4 79.3 152.5 80.0" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 17.9 79.7 C 62.0 79.5 108.5 80.5 152.2 79.9" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><clipPath id="h121"><rect x="46" y="82" width="78" height="18"/></clipPath><g clip-path="url(#h121)"><path d="M 27.6 100.1 C 34.2 94.1 41.1 87.3 45.9 82.4" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 32.5 99.7 C 38.9 94.7 43.8 88.3 51.0 82.4" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 37.1 99.6 C 42.8 94.3 49.7 88.4 55.5 81.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 41.1 99.8 C 47.9 94.1 53.8 88.4 59.2 82.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 45.8 100.2 C 52.0 93.8 59.0 87.6 64.3 82.2" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 50.3 99.9 C 55.6 94.4 63.7 87.1 68.5 81.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 54.8 99.9 C 59.9 94.5 66.9 87.2 72.8 82.2" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 59.4 100.5 C 65.6 93.4 70.8 88.4 77.7 81.6" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 64.2 99.7 C 70.4 93.4 77.0 88.3 82.2 82.4" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 68.8 99.6 C 73.7 94.8 80.1 87.8 86.7 81.6" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 72.9 99.9 C 78.8 94.0 84.8 88.6 91.1 82.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 77.6 100.2 C 83.1 94.9 90.3 88.6 95.5 82.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 82.4 100.4 C 87.9 94.2 94.5 87.4 99.7 81.5" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 86.5 99.8 C 91.9 94.2 98.0 87.0 104.5 81.5" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 90.5 100.5 C 97.8 93.6 103.3 87.6 108.7 82.5" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 95.0 100.5 C 102.1 94.7 107.2 87.7 113.0 81.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 100.3 99.8 C 105.3 94.6 112.2 88.4 117.8 81.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 104.1 100.1 C 111.0 95.0 116.8 88.8 122.1 82.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 108.7 100.1 C 115.1 94.1 120.4 88.7 126.8 81.5" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 113.9 100.1 C 118.6 94.3 126.0 87.3 131.0 82.4" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 118.0 100.5 C 123.5 93.5 130.3 87.9 135.5 82.4" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 123.0 99.7 C 128.1 93.4 135.0 87.6 140.7 82.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/></g><path d="M 45.8 82.3 C 71.5 82.9 98.7 82.2 123.5 81.8" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 45.6 81.6 C 72.2 81.9 99.0 81.3 124.2 82.1" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 123.8 82.0 C 124.5 87.6 123.5 94.2 124.1 99.8" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 123.9 82.2 C 124.3 87.9 124.6 94.3 124.3 100.3" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 124.4 100.3 C 97.2 99.6 71.6 100.4 46.5 99.5" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 124.5 100.4 C 97.4 100.7 70.0 99.6 46.0 100.0" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 46.3 99.9 C 46.4 94.2 46.6 87.9 45.7 82.3" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 45.7 100.2 C 45.6 94.7 46.3 87.5 46.1 82.3" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 98.1 46.2 C 110.9 46.7 124.7 45.1 138.0 46.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 98.4 80.4 C 110.6 80.5 125.2 80.2 137.5 79.7" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 140.0 45.5 C 140.4 56.1 139.5 69.3 140.3 79.6" fill="none" stroke="#9aa3af" stroke-width="0.8" stroke-linecap="round" opacity="0.92"/><path d="M 140.0 46.0 L 139.0 49.0 L 141.0 49.0 Z" fill="#9aa3af" stroke="none"/><path d="M 140.0 80.0 L 141.0 77.0 L 139.0 77.0 Z" fill="#9aa3af" stroke="none"/><text x="145" y="66" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing=".5" fill="#9aa3af">h</text></svg><figcaption>Fundação</figcaption><p>Contas, rastreamento e painel, no mês 1.</p></figure>
+            <figure><svg viewBox="0 0 170 132" role="img" aria-label="Prancha técnica: a gota tocando o nível d'água e abrindo a primeira onda, com o raio R1 cotado."><path d="M 85 6 L 85 124" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-dasharray="7 2.5 1.5 2.5" opacity=".9"/><path d="M 18.1 80.3 C 62.5 80.3 109.9 79.7 151.5 80.4" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 18.3 80.2 C 62.4 80.7 109.8 80.4 151.6 80.2" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 86.8 57.9 Q 88.0 58.9 88.6 59.1 Q 88.9 59.8 89.9 60.8 Q 90.6 61.6 90.6 62.9 Q 90.5 64.0 90.0 65.0 Q 89.7 66.1 89.0 66.9 Q 87.8 67.9 87.1 68.0 Q 86.3 68.5 85.0 68.5 Q 84.1 68.6 82.8 68.2 Q 82.0 67.1 81.2 66.7 Q 80.3 65.7 79.7 65.1 Q 80.0 63.7 79.4 62.9 Q 79.4 62.1 80.1 60.8 Q 81.0 60.0 81.4 59.1 Q 82.1 58.2 83.1 57.8 " fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 86.9 57.9 Q 87.6 58.6 88.9 58.8 Q 89.4 59.5 90.0 60.7 Q 90.1 61.6 90.3 62.9 Q 90.2 64.2 89.9 64.9 Q 89.3 65.8 88.9 66.8 Q 88.1 67.3 87.1 67.9 Q 86.1 68.1 85.0 68.4 Q 83.7 68.6 82.9 68.0 Q 81.9 67.8 80.9 67.0 Q 80.6 65.9 79.9 65.0 Q 79.9 63.7 79.5 62.9 Q 80.0 62.1 80.1 60.8 Q 80.8 59.8 81.1 58.8 Q 82.4 58.6 83.1 57.7 " fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 84.9 51.9 C 84.2 53.9 83.9 56.0 83.0 57.8" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 84.9 52.0 C 84.5 53.9 83.6 55.9 83.1 57.7" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 85.1 52.0 C 85.6 54.0 86.4 56.0 87.0 57.9" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 85.1 52.1 C 85.7 54.2 86.0 56.1 87.0 57.9" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 109.4 83.2 Q 104.9 85.1 99.4 86.4 Q 92.0 87.2 85.0 87.7 Q 77.4 86.7 70.5 86.5 Q 66.1 85.2 60.9 83.2 Q 59.6 80.8 58.5 78.9 Q 62.0 76.6 65.7 75.2 Q 71.9 74.4 77.5 72.7 Q 85.1 72.3 92.3 72.8 Q 98.3 74.4 104.4 75.1 Q 107.1 77.2 110.7 78.9 Q 109.5 81.3 108.4 83.1 " fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 110.7 81.2 Q 107.3 83.5 104.4 85.0 Q 98.4 86.1 91.9 87.2 Q 84.9 87.6 77.4 87.1 Q 71.4 85.5 65.5 84.7 Q 63.2 83.3 60.1 80.9 Q 60.5 78.7 61.4 76.8 Q 66.0 75.3 70.8 73.4 Q 78.5 73.2 85.4 72.3 Q 92.2 73.5 99.0 73.9 Q 103.5 75.2 108.5 77.0 Q 109.4 78.7 110.8 81.2 " fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 58.9 84.0 C 59.0 91.0 58.2 97.2 59.4 104.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 111.4 84.0 C 110.7 90.2 110.2 97.4 110.9 104.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 59.2 106.3 C 76.6 105.4 94.7 106.1 110.8 106.2" fill="none" stroke="#9aa3af" stroke-width="0.8" stroke-linecap="round" opacity="0.92"/><path d="M 59.0 106.0 L 62.0 107.0 L 62.0 105.0 Z" fill="#9aa3af" stroke="none"/><path d="M 111.0 106.0 L 108.0 105.0 L 108.0 107.0 Z" fill="#9aa3af" stroke="none"/><text x="85" y="102" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing=".5" fill="#9aa3af">R1</text></svg><figcaption>A gota</figcaption><p>Verba baixa de propósito, um ajuste por vez.</p></figure>
+            <figure><svg viewBox="0 0 170 132" role="img" aria-label="Prancha técnica: três ondas concêntricas abrindo do ponto de impacto, com os raios marcados até R3."><path d="M 85 6 L 85 124" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-dasharray="7 2.5 1.5 2.5" opacity=".9"/><path d="M 18.4 79.7 C 63.3 79.2 109.2 80.1 151.5 79.9" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 17.7 79.8 C 62.5 80.5 109.6 79.5 151.8 80.3" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 110.1 81.0 Q 107.9 83.4 104.8 84.9 Q 99.0 86.4 92.4 87.2 Q 84.5 87.4 77.6 87.4 Q 71.6 86.3 64.8 85.1 Q 62.1 82.8 58.5 81.1 Q 60.4 79.3 61.4 76.9 Q 66.5 75.6 70.6 73.6 Q 77.6 72.8 84.9 72.4 Q 92.1 73.5 98.9 73.7 Q 103.8 75.0 108.1 76.9 Q 110.1 78.9 111.2 81.0 " fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 107.9 83.1 Q 102.9 84.6 98.3 86.2 Q 91.5 86.6 84.6 87.7 Q 77.6 86.6 71.0 86.1 Q 65.7 85.0 60.4 83.1 Q 59.8 80.6 59.4 78.8 Q 62.9 77.4 66.0 75.1 Q 72.2 73.9 78.2 72.9 Q 85.9 72.9 92.8 72.7 Q 99.0 73.8 104.3 75.3 Q 107.0 77.0 110.2 79.1 Q 109.3 80.9 108.0 83.2 " fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 128.3 80.6 Q 124.5 84.0 120.6 87.0 Q 110.8 88.9 101.4 91.4 Q 89.1 92.1 76.3 91.9 Q 64.9 90.0 53.9 88.8 Q 47.8 85.3 41.5 82.8 Q 41.7 79.3 42.2 75.9 Q 50.1 72.9 58.3 70.6 Q 69.3 69.2 81.1 67.9 Q 92.9 68.8 105.0 69.6 Q 114.3 71.7 123.6 74.0 Q 126.0 77.3 127.5 80.6 " fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.5704"/><path d="M 127.2 84.7 Q 119.5 87.2 111.1 90.1 Q 98.7 90.7 87.0 92.4 Q 75.3 91.2 63.2 90.2 Q 55.4 87.9 47.1 85.3 Q 44.3 82.4 41.4 78.8 Q 46.2 75.3 50.5 72.5 Q 60.8 70.9 70.4 68.4 Q 82.9 68.1 95.9 68.0 Q 107.3 69.7 117.8 71.5 Q 123.3 74.9 129.4 77.7 Q 127.4 81.0 126.0 84.5 " fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.279"/><path d="M 147.3 81.3 Q 140.9 85.9 133.8 89.9 Q 119.5 92.9 105.5 95.0 Q 88.3 95.9 71.3 96.2 Q 55.8 93.4 40.7 91.6 Q 33.4 87.0 26.0 83.3 Q 25.4 79.0 25.2 73.9 Q 36.4 70.5 48.5 66.8 Q 64.9 65.5 81.0 63.3 Q 97.9 63.9 115.3 65.5 Q 127.5 69.1 139.6 72.2 Q 144.3 76.5 148.0 81.3 " fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.3312"/><path d="M 144.8 85.1 Q 135.1 88.8 124.5 92.8 Q 108.9 94.2 92.2 96.3 Q 74.8 96.2 56.9 95.3 Q 44.9 91.4 33.8 88.3 Q 27.2 83.6 21.3 79.6 Q 28.2 75.2 34.6 70.9 Q 47.0 67.7 60.2 64.5 Q 77.6 64.4 95.5 63.5 Q 110.3 65.5 126.0 68.0 Q 136.5 71.7 146.3 75.7 Q 144.3 80.3 143.2 85.0 " fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.162"/><path d="M 87.6 80.2 Q 87.1 80.1 87.0 80.9 Q 86.0 80.9 85.7 81.4 Q 85.3 81.4 84.2 81.4 Q 83.2 81.1 83.0 80.9 Q 82.4 80.9 82.3 80.2 Q 82.7 80.3 82.6 79.4 Q 83.3 79.3 83.7 78.9 Q 84.6 78.6 85.0 78.6 Q 85.4 78.6 86.4 78.8 Q 86.9 79.3 87.4 79.4 Q 87.5 79.6 87.6 80.2 " fill="none" stroke="#1256D3" stroke-width="1.2" stroke-linecap="round" opacity="0.92"/><path d="M 87.3 80.5 Q 87.1 81.1 86.5 81.2 Q 85.9 81.3 85.0 81.4 Q 84.7 81.6 83.6 81.2 Q 83.1 80.5 82.7 80.6 Q 82.3 80.0 82.4 79.8 Q 82.6 79.9 83.0 79.1 Q 83.2 79.1 84.2 78.6 Q 85.0 78.4 85.7 78.7 Q 86.5 78.7 87.0 79.0 Q 87.0 79.6 87.6 79.8 Q 87.6 80.4 87.4 80.6 " fill="none" stroke="#1256D3" stroke-width="1.2" stroke-linecap="round" opacity="0.45"/><path d="M 84.5 83.6 C 84.6 95.2 85.0 106.7 84.7 116.3" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 147.0 84.0 C 147.6 95.7 146.6 105.1 146.6 116.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 85.0 118.5 C 105.0 117.4 127.2 118.2 146.5 118.4" fill="none" stroke="#9aa3af" stroke-width="0.8" stroke-linecap="round" opacity="0.92"/><path d="M 85.0 118.0 L 88.0 119.0 L 88.0 117.0 Z" fill="#9aa3af" stroke="none"/><path d="M 147.0 118.0 L 144.0 117.0 L 144.0 119.0 Z" fill="#9aa3af" stroke="none"/><text x="116" y="114" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing=".5" fill="#9aa3af">R3</text><path d="M 111.0 114.9 C 111.1 116.8 111.2 119.3 111.0 121.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 129.1 114.9 C 128.8 116.9 129.1 119.3 129.1 121.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/></svg><figcaption>A onda</figcaption><p>Amplia só depois que existe comparação.</p></figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="servico">
+        <div>
+          <svg class="emblema" viewBox="0 0 86 92" role="img" aria-label="Uma amostra sorteada dentro de uma população: cinco pontos circulados entre vinte e cinco, com a moldura da população tracejada."><rect x="10" y="10" width="66" height="66" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-dasharray="4 3"/><circle cx="17" cy="17" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><circle cx="17" cy="30" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><circle cx="17" cy="43" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><path d="M 21.5 56.3 Q 20.9 57.1 20.5 58.6 Q 19.4 59.9 18.6 60.2 Q 17.3 59.8 16.1 60.3 Q 15.3 59.4 13.9 59.2 Q 13.1 58.5 12.6 57.0 Q 12.8 55.9 12.8 54.4 Q 13.5 53.4 14.4 52.6 Q 15.6 52.3 16.7 51.7 Q 17.4 51.6 19.1 52.2 Q 20.3 53.2 20.9 53.8 Q 21.2 55.5 21.5 56.3 " fill="none" stroke="#102694" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 21.1 57.6 Q 20.5 58.5 19.6 59.6 Q 18.9 59.5 17.2 60.4 Q 16.4 60.2 14.8 59.9 Q 14.2 59.1 13.1 58.0 Q 13.0 56.8 12.6 55.6 Q 13.2 54.3 13.6 53.3 Q 14.7 52.7 15.6 52.0 Q 17.0 51.6 18.0 51.8 Q 18.7 52.2 20.2 52.9 Q 20.3 53.7 21.2 55.2 Q 20.8 56.1 21.0 57.6 " fill="none" stroke="#102694" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><circle cx="17" cy="56" r="2" fill="#102694"/><circle cx="17" cy="69" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><path d="M 34.3 17.8 Q 33.3 19.3 33.2 20.1 Q 32.2 21.0 31.0 21.2 Q 29.5 20.9 28.6 21.1 Q 27.4 20.4 26.5 19.8 Q 26.4 18.3 25.8 17.4 Q 26.0 15.8 26.1 15.0 Q 26.6 14.5 27.9 13.3 Q 29.1 13.3 30.2 12.6 Q 31.6 13.2 32.5 13.5 Q 33.2 14.9 34.1 15.4 Q 34.4 16.2 34.5 17.9 " fill="none" stroke="#102694" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 34.5 17.5 Q 33.8 18.7 33.5 19.7 Q 32.7 20.7 31.5 21.3 Q 30.6 21.6 28.9 21.3 Q 28.3 20.7 26.7 20.1 Q 26.2 19.1 25.7 17.8 Q 25.9 16.6 25.8 15.3 Q 26.4 13.9 27.5 13.5 Q 28.4 13.4 29.8 12.6 Q 30.6 13.4 32.2 13.2 Q 32.9 14.0 34.1 14.9 Q 34.7 16.4 34.5 17.4 " fill="none" stroke="#102694" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><circle cx="30" cy="17" r="2" fill="#102694"/><circle cx="30" cy="30" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><circle cx="30" cy="43" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><circle cx="30" cy="56" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><circle cx="30" cy="69" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><circle cx="43" cy="17" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><circle cx="43" cy="30" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><circle cx="43" cy="43" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><circle cx="43" cy="56" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><path d="M 47.4 69.8 Q 46.8 70.6 46.1 71.9 Q 45.0 72.9 44.1 73.2 Q 42.5 73.1 41.6 73.3 Q 41.0 72.7 39.5 71.8 Q 39.1 70.4 38.7 69.5 Q 38.7 67.9 39.0 67.0 Q 39.6 66.1 40.7 65.2 Q 41.5 65.2 43.2 64.7 Q 44.0 65.0 45.6 65.3 Q 46.5 66.0 47.0 67.4 Q 47.2 68.1 47.3 69.8 " fill="none" stroke="#102694" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 47.3 70.0 Q 46.9 71.4 46.2 72.3 Q 44.8 72.9 43.8 73.2 Q 42.3 73.5 41.3 73.2 Q 40.5 72.3 39.3 71.7 Q 39.0 70.8 38.6 69.2 Q 39.0 67.6 39.0 66.7 Q 39.6 65.5 41.0 65.2 Q 42.0 64.6 43.4 64.6 Q 44.2 65.3 45.6 65.6 Q 46.4 66.3 47.0 67.6 Q 47.0 68.4 47.4 70.0 " fill="none" stroke="#102694" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><circle cx="43" cy="69" r="2" fill="#102694"/><circle cx="56" cy="17" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><path d="M 60.5 30.8 Q 59.6 32.0 59.2 33.0 Q 58.1 33.9 57.1 34.2 Q 55.5 34.0 54.6 34.3 Q 53.4 34.0 52.5 32.8 Q 52.3 31.5 51.7 30.5 Q 51.4 29.7 51.9 28.0 Q 53.1 26.8 53.7 26.2 Q 54.6 25.3 56.2 25.5 Q 57.8 26.1 58.5 26.5 Q 59.0 27.8 60.0 28.4 Q 59.8 29.6 60.4 30.8 " fill="none" stroke="#102694" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 60.4 31.2 Q 59.2 32.5 58.9 33.2 Q 57.4 33.5 56.7 34.2 Q 55.5 33.7 54.2 34.1 Q 52.9 33.0 52.4 32.4 Q 52.5 31.7 51.6 30.1 Q 52.1 28.5 52.2 27.6 Q 52.9 27.0 54.1 26.1 Q 55.1 25.8 56.6 25.6 Q 57.6 26.4 58.7 26.7 Q 59.4 28.0 60.1 28.7 Q 60.5 29.8 60.3 31.2 " fill="none" stroke="#102694" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><circle cx="56" cy="30" r="2" fill="#102694"/><circle cx="56" cy="43" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><circle cx="56" cy="56" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><circle cx="56" cy="69" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><circle cx="69" cy="17" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><circle cx="69" cy="30" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><circle cx="69" cy="43" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/><path d="M 73.2 57.6 Q 72.2 58.6 71.7 59.6 Q 70.2 59.9 69.3 60.5 Q 67.7 60.6 66.9 59.8 Q 66.5 59.4 65.2 58.1 Q 65.4 57.1 64.8 55.7 Q 65.3 55.0 65.5 53.4 Q 66.9 53.1 67.5 51.9 Q 68.3 52.0 69.9 51.8 Q 70.9 52.2 72.1 52.9 Q 72.9 53.5 73.3 55.1 Q 72.8 55.9 73.1 57.5 " fill="none" stroke="#102694" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 73.3 56.9 Q 72.6 58.3 72.2 59.1 Q 71.3 59.9 70.0 60.4 Q 68.7 60.0 67.5 60.2 Q 66.5 59.3 65.4 58.8 Q 64.8 58.0 64.7 56.4 Q 65.3 55.4 65.0 53.9 Q 65.9 53.0 66.9 52.3 Q 68.5 52.3 69.2 51.7 Q 70.4 51.8 71.6 52.3 Q 72.5 53.2 73.0 54.4 Q 73.5 55.9 73.4 56.9 " fill="none" stroke="#102694" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><circle cx="69" cy="56" r="2" fill="#102694"/><circle cx="69" cy="69" r="2.2" fill="none" stroke="#9aa3af" stroke-width="0.6"/></svg>
+          <h3>Pesquisa estatística</h3>
+          <p>Para a empresa ou organização que precisa decidir algo e não tem o dado: quanto o seu cliente paga, o que o associado quer, o que mudou na vida de quem você atende. Perguntamos para a base certa e entregamos o banco tratado e o relatório.</p>
+          <ul class="lista-limpa miudo" style="margin-top:18px">
+            <li>Questionário testado antes de ir a campo</li>
+            <li>Coleta sobre a base que você já tem</li>
+            <li><strong>Banco de dados tratado, seu</strong></li>
+            <li>Relatório que abre pela ficha técnica, com o método escrito</li>
+          </ul>
+          <div class="marca-q">
+            <img src="assets/quantitare-simbolo.svg" alt="Símbolo do Quantitare" width="44" height="44">
+            <p><b>Quantitare</b>A marca da nossa linha de pesquisa, desde 2017. É ela que vai na capa do relatório.</p>
+          </div>
+        </div>
+        <div>
+          <p class="regua"><strong>Como uma pesquisa acontece:</strong> quatro etapas, e a ficha técnica abrindo o relatório no fim.</p>
+          <div class="tira tira--4 tira--q">
+            <figure><svg viewBox="0 0 150 116" role="img" aria-label="Prancha do questionário: três perguntas com alternativas, uma delas marcada."><path d="M 30.1 11.8 C 56.1 12.2 81.8 12.5 105.5 12.2" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 30.1 12.1 C 55.4 11.1 82.6 11.9 105.7 11.6" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 106.4 12.0 C 106.5 42.1 106.9 75.2 105.9 103.5" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 106.5 12.4 C 106.5 42.5 106.1 75.2 106.0 103.7" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 106.2 104.2 C 81.2 103.1 54.7 103.8 30.5 103.6" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 106.5 104.2 C 79.9 104.3 53.5 103.5 30.1 104.3" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 30.0 103.9 C 30.6 74.7 29.8 41.7 29.8 11.5" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 30.3 104.4 C 30.3 73.7 30.0 40.4 30.3 11.8" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 40.0 26.4 C 54.7 25.0 71.0 25.5 85.7 25.8" fill="none" stroke="#9aa3af" stroke-width="1.2" stroke-linecap="round" opacity="0.92"/><circle cx="44" cy="38" r="3" fill="#102694"/><path d="M 51.7 38.0 C 62.7 37.2 74.4 39.0 83.8 37.6" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 46.6 49.2 Q 45.7 49.6 45.6 50.6 Q 44.5 50.5 44.0 51.1 Q 43.5 50.8 42.4 50.4 Q 41.6 49.7 41.2 49.2 Q 40.8 48.4 41.1 47.5 Q 41.4 46.5 41.7 46.0 Q 42.1 45.0 43.2 45.1 Q 44.2 45.1 44.9 45.0 Q 45.6 45.6 46.3 46.1 Q 46.2 47.2 47.0 47.6 Q 47.2 48.6 46.7 49.3 " fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 51.7 47.6 C 62.0 47.7 73.0 47.4 84.2 48.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 40.1 53.6 C 55.1 55.0 71.4 54.3 86.3 54.5" fill="none" stroke="#9aa3af" stroke-width="1.2" stroke-linecap="round" opacity="0.92"/><path d="M 46.7 67.4 Q 46.2 67.6 45.5 68.5 Q 44.5 68.9 43.9 69.0 Q 43.1 68.7 42.3 68.4 Q 41.5 67.7 41.2 67.2 Q 40.7 66.8 41.1 65.5 Q 41.3 65.0 41.7 63.9 Q 42.8 63.6 43.3 63.2 Q 44.6 63.1 45.0 63.1 Q 45.5 63.4 46.3 64.1 Q 47.0 65.2 46.9 65.7 Q 46.3 67.0 46.8 67.4 " fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 52.4 66.1 C 61.8 66.6 73.6 66.1 84.0 66.2" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 46.8 76.8 Q 46.4 77.3 46.0 78.2 Q 45.7 78.3 44.5 78.9 Q 43.7 78.6 42.8 78.7 Q 42.4 78.4 41.5 77.7 Q 41.7 76.9 41.1 76.1 Q 40.9 75.0 41.5 74.5 Q 42.4 74.2 42.7 73.3 Q 43.3 73.0 44.4 73.0 Q 45.5 72.9 45.9 73.7 Q 46.8 74.1 46.8 75.1 Q 46.9 75.8 46.9 76.8 " fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 52.1 75.7 C 62.0 76.9 73.0 75.5 83.7 75.7" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 40.2 82.0 C 56.3 82.8 71.3 82.1 86.5 82.3" fill="none" stroke="#9aa3af" stroke-width="1.2" stroke-linecap="round" opacity="0.92"/><path d="M 46.7 95.4 Q 46.0 95.8 45.5 96.6 Q 44.9 97.1 43.9 97.1 Q 42.7 96.3 42.2 96.5 Q 41.8 95.4 41.2 95.1 Q 41.2 94.1 41.0 93.4 Q 41.8 92.7 41.8 91.9 Q 43.0 91.5 43.3 91.0 Q 44.2 91.4 45.0 91.1 Q 45.6 91.4 46.3 92.2 Q 46.5 93.3 46.9 93.7 Q 46.4 94.4 46.7 95.4 " fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 52.4 94.1 C 61.5 93.3 72.9 93.5 84.0 94.3" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 46.7 105.3 Q 46.2 105.4 45.6 106.5 Q 45.0 107.3 44.0 107.0 Q 43.1 106.5 42.4 106.4 Q 41.5 106.3 41.2 105.2 Q 41.0 104.4 41.0 103.5 Q 41.0 103.2 41.8 102.0 Q 42.3 101.2 43.2 101.1 Q 44.2 101.0 44.9 101.2 Q 45.3 102.0 46.4 102.0 Q 46.3 103.1 47.0 103.6 Q 46.7 104.5 46.7 105.3 " fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 51.7 103.5 C 63.1 104.0 74.2 104.6 84.1 104.2" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/></svg><figcaption>1. Instrumento</figcaption><p>O questionário, testado antes de ir a campo.</p></figure>
+            <figure><svg viewBox="0 0 150 116" role="img" aria-label="Prancha da coleta: três respostas saindo da base do cliente para o banco de respostas."><path d="M 12.2 24.5 C 22.2 24.2 35.4 24.8 45.8 24.3" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 12.1 24.0 C 22.3 24.4 34.4 24.7 46.0 24.1" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 46.3 24.3 C 47.0 46.0 45.8 70.8 45.6 91.6" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 46.4 23.7 C 46.4 46.9 45.8 69.3 45.9 91.7" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 45.8 91.8 C 35.7 91.4 23.5 91.7 11.7 92.2" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 45.7 91.5 C 33.9 91.7 21.9 91.8 11.6 92.4" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 11.9 91.9 C 12.1 69.9 12.2 45.3 12.4 23.5" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 12.5 91.7 C 12.3 68.8 12.8 45.5 12.2 24.5" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 17.9 33.9 C 25.2 33.9 32.1 34.1 40.0 34.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 17.9 46.1 C 24.4 46.1 32.9 45.5 40.4 46.2" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 17.8 58.2 C 25.8 58.8 33.3 58.3 40.1 58.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 18.0 69.7 C 25.9 69.3 33.2 69.4 40.1 70.4" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 18.1 82.1 C 24.9 81.5 33.4 82.1 40.4 82.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><text x="29" y="18" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing=".6" fill="#9aa3af">BASE</text><path d="M 50.1 42.2 C 63.7 41.6 78.2 42.3 91.7 41.7" fill="none" stroke="#102694" stroke-width="1.3" stroke-linecap="round" opacity="0.92"/><path d="M 50.0 41.7 C 64.9 41.9 78.3 42.9 91.9 41.5" fill="none" stroke="#102694" stroke-width="1.3" stroke-linecap="round" opacity="0.45"/><path d="M 94.0 42.0 L 90.8 40.9 L 90.8 43.1 Z" fill="#102694" stroke="none"/><path d="M 50.1 57.9 C 64.3 58.8 78.1 56.9 92.4 57.8" fill="none" stroke="#102694" stroke-width="1.3" stroke-linecap="round" opacity="0.92"/><path d="M 49.6 57.5 C 64.1 58.2 78.8 59.1 91.7 57.8" fill="none" stroke="#102694" stroke-width="1.3" stroke-linecap="round" opacity="0.45"/><path d="M 94.0 58.0 L 90.8 56.9 L 90.8 59.1 Z" fill="#102694" stroke="none"/><path d="M 50.3 74.3 C 63.1 74.3 78.0 73.5 91.7 74.3" fill="none" stroke="#102694" stroke-width="1.3" stroke-linecap="round" opacity="0.92"/><path d="M 50.5 73.7 C 63.6 74.1 79.3 73.3 92.1 73.7" fill="none" stroke="#102694" stroke-width="1.3" stroke-linecap="round" opacity="0.45"/><path d="M 94.0 74.0 L 90.8 72.9 L 90.8 75.1 Z" fill="#102694" stroke="none"/><path d="M 100.1 38.4 C 111.4 38.5 124.0 37.8 134.1 38.1" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 99.6 37.8 C 112.2 38.4 123.5 38.9 134.1 38.4" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 134.1 38.3 C 134.7 51.1 134.5 66.2 134.1 78.4" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 133.9 38.0 C 133.5 50.6 134.4 65.2 134.1 77.8" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 134.4 78.1 C 123.2 78.5 110.2 78.2 100.3 78.3" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 134.2 78.4 C 121.7 77.4 111.9 76.9 99.5 78.5" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 100.5 78.5 C 99.7 64.6 99.5 50.4 99.6 37.8" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 100.2 77.5 C 99.9 64.7 101.0 50.0 99.5 37.8" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><text x="117" y="94" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing=".6" fill="#9aa3af">RESPOSTAS</text></svg><figcaption>2. Coleta</figcaption><p>Sobre a base que você já tem.</p></figure>
+            <figure><svg viewBox="0 0 150 116" role="img" aria-label="Prancha do tratamento: a tabela do banco com duas linhas descartadas e o total de respondentes."><path d="M 24.3 15.9 C 54.2 15.2 86.5 15.5 115.6 16.5" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 24.4 15.9 C 55.4 15.3 87.3 15.7 116.4 16.0" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 115.6 16.5 C 117.1 43.0 116.4 74.2 115.5 100.0" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 116.2 15.6 C 115.6 44.0 116.5 73.0 116.5 99.5" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 115.7 100.1 C 85.5 101.0 54.0 99.8 24.5 100.5" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 115.5 100.1 C 85.9 99.0 52.9 100.3 24.2 99.9" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 23.7 99.8 C 23.5 71.7 25.1 42.5 23.5 16.5" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 23.8 100.2 C 25.1 71.8 23.7 42.3 24.5 15.7" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 24.0 30.2 C 53.7 30.4 86.5 29.6 116.5 30.4" fill="none" stroke="#102694" stroke-width="1.3" stroke-linecap="round" opacity="0.92"/><path d="M 24.0 30.4 C 54.6 30.4 86.6 30.3 115.6 29.6" fill="none" stroke="#102694" stroke-width="1.3" stroke-linecap="round" opacity="0.45"/><path d="M 24.3 44.0 C 54.0 43.6 86.2 43.1 116.3 44.4" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 23.8 59.8 C 55.1 60.0 85.7 60.0 116.3 59.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 23.7 76.2 C 53.5 75.6 87.4 75.0 116.4 75.7" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 24.0 92.1 C 53.8 92.6 86.9 91.6 115.8 91.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 53.8 16.1 C 54.2 42.9 53.2 73.9 54.1 99.5" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 84.0 15.9 C 84.8 43.2 84.9 72.4 84.5 100.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><rect x="25" y="30" width="90" height="13" fill="#9aa3af" opacity=".16"/><path d="M 26.8 41.1 C 54.4 38.8 86.3 33.4 112.7 31.2" fill="none" stroke="#9aa3af" stroke-width="1.2" stroke-linecap="round" opacity="0.92"/><rect x="25" y="62" width="90" height="13" fill="#9aa3af" opacity=".16"/><path d="M 27.2 73.1 C 56.0 70.3 86.4 65.4 112.5 63.2" fill="none" stroke="#9aa3af" stroke-width="1.2" stroke-linecap="round" opacity="0.92"/><text x="70" y="110" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing=".6" fill="#9aa3af">BANCO TRATADO</text></svg><figcaption>3. Tratamento</figcaption><p>O banco limpo, e seu.</p></figure>
+            <figure><svg viewBox="0 0 150 116" role="img" aria-label="Prancha do relatório: ficha técnica hachurada no topo, o resultado em barras e a linha de assinatura no pé."><path d="M 30.5 9.7 C 58.4 10.7 89.2 10.3 115.7 9.7" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 29.6 10.3 C 58.1 9.3 89.0 10.6 115.8 9.5" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 116.5 10.3 C 116.6 41.1 116.4 76.2 115.5 105.8" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 116.2 9.7 C 115.8 41.4 116.4 74.2 116.5 105.7" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 116.5 105.7 C 87.5 106.7 57.8 105.9 30.4 106.0" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 115.7 105.5 C 87.5 106.5 56.6 105.7 30.4 106.4" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 30.2 106.4 C 29.0 73.3 29.7 41.7 29.9 10.2" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 29.9 106.2 C 30.5 74.0 29.3 41.7 30.3 10.0" fill="none" stroke="#102694" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><clipPath id="h2311"><rect x="38" y="18" width="70" height="16"/></clipPath><g clip-path="url(#h2311)"><path d="M 21.7 34.4 C 26.7 28.1 32.1 23.9 37.8 17.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 26.4 33.9 C 30.9 28.5 36.7 22.7 41.6 18.3" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 30.1 34.2 C 35.9 28.1 41.3 23.9 45.9 18.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 34.1 34.1 C 38.9 27.9 44.1 23.4 49.9 18.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 38.0 33.8 C 42.7 29.4 49.1 22.6 54.1 17.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 42.4 34.1 C 47.7 29.6 53.2 23.5 57.9 18.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 46.2 34.2 C 51.2 28.9 57.3 22.6 61.7 17.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 50.2 33.6 C 55.5 28.7 61.8 22.8 66.0 17.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 54.3 33.8 C 59.3 28.8 64.1 22.7 69.7 18.2" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 57.8 34.1 C 62.7 28.4 68.1 22.2 74.1 18.4" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 61.9 34.2 C 67.3 28.1 72.4 23.1 77.9 17.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 65.7 34.1 C 71.3 28.5 76.7 22.5 81.7 18.2" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 69.7 33.6 C 75.2 28.9 80.0 22.6 86.3 17.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 74.1 33.6 C 79.9 27.9 85.1 23.9 90.2 18.4" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 78.4 34.1 C 83.3 28.7 89.1 22.7 93.9 18.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 82.2 34.0 C 88.1 29.6 92.0 23.4 97.7 18.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 86.4 33.6 C 91.8 29.1 96.6 24.0 102.4 18.4" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 89.8 33.6 C 94.4 29.5 101.0 23.7 105.7 17.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 94.3 34.0 C 99.1 27.9 104.8 23.7 110.4 17.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 98.0 33.8 C 104.1 29.1 108.6 23.7 114.3 17.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 101.7 33.6 C 107.1 28.3 112.4 22.2 118.0 18.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 105.8 34.3 C 111.8 28.8 116.6 23.4 121.6 18.2" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/></g><path d="M 37.8 17.7 C 62.2 17.8 84.7 18.9 108.1 17.9" fill="none" stroke="#9aa3af" stroke-width="1.2" stroke-linecap="round" opacity="0.92"/><path d="M 37.7 17.8 C 60.1 19.0 84.9 18.3 108.0 17.9" fill="none" stroke="#9aa3af" stroke-width="1.2" stroke-linecap="round" opacity="0.45"/><path d="M 107.8 17.9 C 108.2 23.8 107.4 28.9 107.8 34.0" fill="none" stroke="#9aa3af" stroke-width="1.2" stroke-linecap="round" opacity="0.92"/><path d="M 108.2 17.9 C 107.9 23.2 108.6 28.4 108.0 34.2" fill="none" stroke="#9aa3af" stroke-width="1.2" stroke-linecap="round" opacity="0.45"/><path d="M 108.1 33.5 C 84.7 33.0 60.4 34.8 38.5 33.8" fill="none" stroke="#9aa3af" stroke-width="1.2" stroke-linecap="round" opacity="0.92"/><path d="M 108.0 33.6 C 85.3 33.6 60.3 33.7 38.2 33.6" fill="none" stroke="#9aa3af" stroke-width="1.2" stroke-linecap="round" opacity="0.45"/><path d="M 38.0 34.1 C 37.8 28.4 38.2 23.2 37.9 18.0" fill="none" stroke="#9aa3af" stroke-width="1.2" stroke-linecap="round" opacity="0.92"/><path d="M 38.1 34.1 C 38.2 28.7 37.5 23.0 38.0 18.3" fill="none" stroke="#9aa3af" stroke-width="1.2" stroke-linecap="round" opacity="0.45"/><rect x="58" y="21" width="30" height="11" fill="#ffffff" opacity=".92"/><text x="73" y="30" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing=".6" fill="#9aa3af">FICHA</text><rect x="40" y="60" width="11" height="16" rx="1" fill="#102694" opacity="0.90"/><rect x="57" y="50" width="11" height="26" rx="1" fill="#102694" opacity="0.78"/><rect x="74" y="64" width="11" height="12" rx="1" fill="#102694" opacity="0.66"/><rect x="91" y="54" width="11" height="22" rx="1" fill="#102694" opacity="0.54"/><path d="M 38.4 75.9 C 60.4 76.6 86.3 75.4 107.8 76.4" fill="none" stroke="#2b3440" stroke-width="1.2" stroke-linecap="round" opacity="0.92"/><path d="M 37.9 76.4 C 61.5 75.6 86.3 76.0 108.2 75.6" fill="none" stroke="#2b3440" stroke-width="1.2" stroke-linecap="round" opacity="0.45"/><path d="M 50.0 92.0 C 64.3 92.1 80.3 92.8 95.9 91.6" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><text x="73" y="102" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing=".6" fill="#9aa3af">ASSINATURA</text></svg><figcaption>4. Relatório</figcaption><p>Ficha técnica, resultado e assinatura.</p></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PARA QUEM ================= -->
+<section class="faixa" id="portas">
+  <div class="wrap">
+    <h2 style="max-width:20em">Três setores. Em todos, a corrente arrebenta antes do fim.</h2>
+    <p style="margin-top:16px;max-width:38em">Cada quadro abre com a pergunta que costuma ficar sem resposta.</p>
+
+    <div class="grade grade--3" style="margin-top:40px">
+      <article class="cartao cartao--branco">
+        <svg class="emblema" viewBox="0 0 86 86" role="img" aria-label="Elevação de uma torre com as unidades vendidas preenchidas e as disponíveis em contorno, com a altura cotada."><rect x="24" y="16" width="17" height="7" rx="1" fill="#1256D3" opacity=".85"/><rect x="24" y="27" width="17" height="7" rx="1" fill="#1256D3" opacity=".85"/><rect x="24" y="49" width="17" height="7" rx="1" fill="#1256D3" opacity=".85"/><rect x="45" y="16" width="17" height="7" rx="1" fill="#1256D3" opacity=".85"/><rect x="45" y="38" width="17" height="7" rx="1" fill="#1256D3" opacity=".85"/><path d="M 21.7 13.9 C 36.8 13.2 51.6 13.3 63.9 13.5" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 22.4 14.2 C 35.5 14.8 50.5 14.2 64.1 13.6" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 63.5 14.2 C 65.0 33.1 63.9 52.4 64.4 68.9" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 64.4 14.3 C 64.7 33.2 65.0 52.0 63.8 68.5" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 63.9 69.3 C 50.6 69.8 35.6 68.8 21.9 68.8" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 64.1 68.8 C 50.5 69.3 35.2 70.0 22.2 68.6" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 22.1 68.9 C 22.6 50.8 21.5 31.0 22.1 13.5" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 21.9 69.5 C 21.0 50.3 21.6 30.5 22.4 14.3" fill="none" stroke="#1256D3" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 22.0 24.6 C 36.2 24.3 50.3 24.8 63.5 24.5" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 21.9 35.8 C 35.5 34.9 49.7 35.6 64.5 36.1" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 22.1 47.2 C 34.8 48.0 51.1 47.0 64.4 46.6" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 21.5 58.0 C 35.8 58.3 50.2 57.4 63.5 57.6" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 43.2 14.5 C 42.4 32.9 43.7 50.6 42.5 68.8" fill="none" stroke="#1256D3" stroke-width="1.1" stroke-linecap="round" opacity="0.92"/><path d="M 13.5 68.6 C 32.5 68.8 54.0 69.7 72.2 69.1" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 14.2 68.8 C 32.2 68.5 53.8 69.8 71.5 68.7" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><clipPath id="h1271"><rect x="14" y="69" width="58" height="7"/></clipPath><g clip-path="url(#h1271)"><path d="M 6.9 76.0 C 9.6 73.7 11.9 70.9 14.2 68.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 12.0 76.0 C 14.0 73.8 16.9 70.9 18.9 68.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 17.0 76.2 C 19.2 73.8 22.0 71.2 24.0 69.2" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 22.2 76.0 C 24.6 73.5 26.8 71.3 29.0 68.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 27.2 76.0 C 29.3 73.4 32.0 71.5 33.8 69.2" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 32.0 75.8 C 34.3 73.4 36.9 71.0 39.2 69.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 36.8 76.0 C 39.7 73.6 42.0 71.3 43.9 68.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 42.1 76.1 C 44.1 73.4 47.0 71.6 49.1 68.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 46.8 75.8 C 49.1 74.0 51.6 71.5 54.0 69.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 52.0 76.1 C 54.4 73.4 56.7 71.5 59.2 68.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 57.1 76.0 C 59.2 73.7 61.5 71.1 63.8 68.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 62.1 76.1 C 64.5 73.5 67.0 71.6 68.8 68.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 67.1 75.9 C 69.1 73.9 72.0 71.0 74.1 69.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/></g><path d="M 65.9 13.9 C 68.8 13.9 71.5 14.2 74.1 14.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 65.9 68.8 C 68.4 69.2 71.5 69.1 74.1 69.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 75.7 14.5 C 75.6 32.7 76.6 50.9 76.0 68.7" fill="none" stroke="#9aa3af" stroke-width="0.8" stroke-linecap="round" opacity="0.92"/><path d="M 76.0 14.0 L 75.0 17.0 L 77.0 17.0 Z" fill="#9aa3af" stroke="none"/><path d="M 76.0 69.0 L 77.0 66.0 L 75.0 66.0 Z" fill="#9aa3af" stroke="none"/></svg>
+        <span class="selo selo--obra">Mercado imobiliário</span>
+        <h4>Dos contatos do mês passado, quantos viraram visita ao estande?</h4>
+        <figure class="porta"><svg viewBox="0 0 320 240" role="img" aria-label="Corrente da construtora: anúncio, clique e lead são medidos; visita ao estande, proposta e unidade vendida, não.">
+          <line x1="13" y1="18" x2="13" y2="52" stroke="#1256D3" stroke-width="2"/>
+          <line x1="13" y1="52" x2="13" y2="86" stroke="#1256D3" stroke-width="2"/>
+          <line x1="13" y1="86" x2="13" y2="120" stroke="#1256D3" stroke-width="2"/>
+          <line x1="13" y1="120" x2="13" y2="154" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3 4"/>
+          <line x1="13" y1="154" x2="13" y2="188" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3 4"/>
+          <line x1="13" y1="188" x2="13" y2="222" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3 4"/>
+          <circle cx="13" cy="18" r="5.5" fill="#1256D3"/>
+          <text x="32" y="22.5" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111111">anúncio</text>
+          <circle cx="13" cy="52" r="5.5" fill="#1256D3"/>
+          <text x="32" y="56.5" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111111">clique</text>
+          <circle cx="13" cy="86" r="5.5" fill="#1256D3"/>
+          <text x="32" y="90.5" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111111">lead</text>
+          <circle cx="13" cy="120" r="5" fill="#ffffff" stroke="#1256D3" stroke-width="2"/>
+          <text x="32" y="124.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#374151">atendimento</text>
+          <circle cx="13" cy="154" r="5" fill="#ffffff" stroke="#f59e0b" stroke-width="2"/>
+          <text x="32" y="158.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#6b7280">visita ao estande</text>
+          <circle cx="13" cy="188" r="5" fill="#ffffff" stroke="#f59e0b" stroke-width="2"/>
+          <text x="32" y="192.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#6b7280">proposta</text>
+          <circle cx="13" cy="222" r="5" fill="#ffffff" stroke="#f59e0b" stroke-width="2"/>
+          <text x="32" y="226.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#6b7280">unidade vendida</text>
+          </svg></figure>
+        <p class="miudo">Lead é fácil de contar. Visita é o primeiro número que a diretoria reconhece como dinheiro.</p>
+      </article>
+
+      <article class="cartao cartao--branco">
+        <svg class="emblema" viewBox="0 0 86 86" role="img" aria-label="Uma mesa de negociação em elevação: dois lados sentados, o documento sobre o tampo e o piso em corte."><path d="M 8.2 72.1 C 30.7 71.7 56.1 71.7 77.7 72.3" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 8.5 72.0 C 31.7 71.4 55.5 72.4 77.9 71.5" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><clipPath id="h511"><rect x="8" y="72" width="70" height="7"/></clipPath><g clip-path="url(#h511)"><path d="M 0.8 78.9 C 3.1 76.5 6.0 73.9 7.9 72.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 5.9 78.8 C 8.7 76.5 10.5 73.9 12.9 71.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 11.1 79.2 C 13.5 76.4 15.8 74.1 17.9 72.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 16.1 79.0 C 18.6 76.6 20.9 73.9 23.1 71.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 21.0 79.1 C 23.7 77.0 26.1 74.1 27.9 71.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 26.1 79.0 C 28.6 76.6 31.1 74.0 33.0 71.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 30.8 79.1 C 33.7 76.5 35.8 73.9 37.9 72.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 36.0 78.9 C 38.4 76.6 41.0 74.3 43.1 72.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 40.9 78.8 C 43.1 76.6 45.4 74.3 48.1 71.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 46.1 78.8 C 48.7 76.9 51.1 74.5 53.0 71.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 51.0 78.8 C 53.5 76.7 55.9 74.5 57.8 72.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 56.1 79.0 C 58.6 76.8 60.8 74.6 62.9 72.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 60.8 79.0 C 63.0 76.7 65.8 74.0 68.0 71.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 66.0 79.1 C 68.3 76.7 71.1 74.4 72.9 72.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 71.0 79.0 C 73.2 76.5 75.4 73.9 78.2 71.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 76.0 79.2 C 78.3 76.7 80.5 74.3 82.9 72.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/></g><clipPath id="h521"><rect x="14" y="44" width="58" height="4"/></clipPath><g clip-path="url(#h521)"><path d="M 9.9 48.1 C 11.4 46.9 12.9 45.4 13.9 44.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 14.0 48.0 C 15.3 46.6 16.6 45.1 18.0 43.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 17.9 48.0 C 19.3 46.7 20.7 45.2 22.0 44.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 22.1 47.9 C 23.5 46.8 24.9 45.2 26.1 43.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 26.0 48.0 C 27.1 46.7 28.7 45.5 30.1 44.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 30.1 47.9 C 31.4 46.7 32.8 45.2 34.1 44.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 34.0 48.0 C 35.4 46.5 36.6 45.1 38.0 44.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 38.1 47.9 C 39.5 46.7 40.9 45.5 42.1 44.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 42.1 47.9 C 43.3 46.7 44.5 45.2 46.0 43.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 46.0 48.0 C 47.5 46.8 48.6 45.2 50.1 44.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 49.9 48.0 C 51.5 46.5 52.6 45.2 54.1 43.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 54.1 48.1 C 55.4 46.7 56.7 45.4 58.0 44.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 58.0 48.0 C 59.3 46.7 60.8 45.4 62.0 44.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 62.0 48.0 C 63.1 46.5 64.9 45.3 65.9 44.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 65.9 47.9 C 67.1 46.5 68.7 45.2 70.1 43.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 69.9 48.1 C 71.5 46.7 72.8 45.3 73.9 44.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/></g><path d="M 14.4 44.2 C 32.8 44.1 53.8 43.0 72.5 43.9" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 13.6 43.7 C 33.4 43.2 53.9 43.0 72.1 43.6" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 72.0 43.9 C 71.9 45.4 72.1 46.8 72.0 47.9" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 72.1 44.0 C 72.0 45.3 72.1 46.9 72.0 47.9" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 71.7 48.4 C 54.0 47.4 31.6 47.7 14.4 48.2" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 72.2 48.0 C 52.0 47.5 33.0 49.0 13.7 48.3" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 13.9 47.9 C 14.1 46.7 13.9 45.2 14.0 44.0" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 14.0 48.0 C 14.0 46.7 14.1 45.2 14.1 43.9" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 23.9 48.0 C 23.7 55.9 23.2 63.5 23.7 71.7" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 24.2 48.3 C 24.2 55.2 24.3 64.8 23.5 72.4" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 62.0 48.2 C 61.5 56.9 61.8 64.8 62.3 71.5" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 62.5 47.5 C 62.3 56.7 62.8 64.2 62.3 71.8" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 32.1 25.9 Q 31.3 27.7 30.2 29.0 Q 28.6 30.1 26.8 30.3 Q 25.5 30.4 23.3 29.8 Q 21.9 29.1 20.6 27.4 Q 20.0 25.8 19.5 23.9 Q 20.3 21.7 20.5 20.4 Q 22.1 18.8 23.3 17.9 Q 25.6 17.4 27.0 17.6 Q 28.2 18.2 30.2 19.2 Q 31.3 20.8 32.2 22.2 Q 31.7 24.2 32.0 25.8 " fill="none" stroke="#2b3440" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 32.7 24.2 Q 31.9 25.6 31.2 27.6 Q 30.1 29.0 28.4 29.9 Q 26.2 29.8 24.8 30.5 Q 23.3 29.7 21.5 28.8 Q 20.5 27.6 19.6 25.6 Q 20.1 24.0 20.0 22.0 Q 20.9 20.2 22.0 19.0 Q 23.8 17.9 25.3 17.3 Q 27.1 17.5 28.9 18.3 Q 29.9 19.5 31.7 20.6 Q 32.2 22.5 32.4 24.2 " fill="none" stroke="#2b3440" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 16.9 40.0 C 18.2 37.5 19.9 35.2 21.1 33.2" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 17.0 39.9 C 18.6 37.4 19.5 35.2 21.1 32.9" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 20.9 33.2 C 24.0 33.0 27.9 33.3 31.1 33.2" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 21.1 32.9 C 24.6 32.8 27.6 33.1 30.9 32.9" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 30.9 33.2 C 32.6 35.1 33.4 37.9 35.1 40.1" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 31.0 32.9 C 32.6 35.1 33.8 38.0 34.9 39.9" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 66.0 26.2 Q 64.8 28.2 63.8 29.1 Q 62.2 30.1 60.5 30.4 Q 58.4 30.0 57.0 29.5 Q 55.6 28.2 54.3 27.1 Q 53.9 25.7 53.5 23.5 Q 53.8 22.3 54.8 20.1 Q 56.7 18.5 57.7 17.8 Q 59.7 17.6 61.4 17.7 Q 62.6 19.1 64.4 19.5 Q 65.0 20.9 66.4 22.6 Q 66.2 24.5 66.1 26.3 " fill="none" stroke="#2b3440" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 65.8 26.6 Q 64.3 28.4 63.7 29.5 Q 61.5 29.9 60.1 30.5 Q 58.6 30.4 56.5 29.7 Q 55.0 28.3 54.1 26.8 Q 54.1 25.0 53.4 23.2 Q 54.2 21.6 54.9 19.7 Q 56.5 18.8 58.1 17.9 Q 59.9 17.8 61.7 17.9 Q 63.8 18.4 64.9 19.6 Q 66.3 21.1 66.6 22.9 Q 66.4 24.5 65.8 26.5 " fill="none" stroke="#2b3440" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 51.1 40.1 C 52.6 37.6 53.5 35.1 55.0 32.9" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 51.0 39.9 C 52.2 37.5 53.7 34.9 55.1 33.2" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 55.2 32.9 C 57.9 32.8 61.8 32.9 65.1 33.1" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 54.9 33.0 C 58.2 33.3 61.5 32.9 65.1 33.0" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 65.0 32.9 C 66.4 35.2 67.9 37.8 69.1 40.0" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.92"/><path d="M 65.2 33.0 C 66.5 35.2 67.5 37.5 69.0 40.0" fill="none" stroke="#2b3440" stroke-width="1.4" stroke-linecap="round" opacity="0.45"/><path d="M 35.8 37.0 C 40.9 37.0 45.9 37.4 50.1 36.8" fill="none" stroke="#102694" stroke-width="1.5" stroke-linecap="round" opacity="0.92"/><path d="M 35.9 37.1 C 40.8 37.2 45.2 36.8 50.1 37.0" fill="none" stroke="#102694" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/><path d="M 49.9 37.1 C 50.2 39.6 50.0 41.9 50.1 44.0" fill="none" stroke="#102694" stroke-width="1.5" stroke-linecap="round" opacity="0.92"/><path d="M 49.9 37.1 C 50.2 39.3 50.0 41.8 50.0 44.0" fill="none" stroke="#102694" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/><path d="M 49.8 43.8 C 45.1 43.8 40.0 44.1 36.1 43.8" fill="none" stroke="#102694" stroke-width="1.5" stroke-linecap="round" opacity="0.92"/><path d="M 49.9 44.2 C 45.7 44.5 40.8 43.8 35.8 44.2" fill="none" stroke="#102694" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/><path d="M 35.9 44.1 C 36.3 41.6 35.7 39.4 36.0 36.9" fill="none" stroke="#102694" stroke-width="1.5" stroke-linecap="round" opacity="0.92"/><path d="M 36.1 43.9 C 36.1 41.7 35.8 39.0 36.1 36.9" fill="none" stroke="#102694" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/><path d="M 43 14 L 43 80" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-dasharray="7 2.5 1.5 2.5" opacity=".9"/></svg>
+        <span class="selo selo--sind">Sindicato e entidade de classe</span>
+        <h4>A campanha de filiação fala com quem, exatamente?</h4>
+        <figure class="porta"><svg viewBox="0 0 320 172" role="img" aria-label="Corrente do sindicato: categoria e filiado são medidos; o que a categoria ganha e pensa, e o resultado na mesa, não.">
+          <line x1="13" y1="18" x2="13" y2="52" stroke="#102694" stroke-width="2"/>
+          <line x1="13" y1="52" x2="13" y2="86" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3 4"/>
+          <line x1="13" y1="86" x2="13" y2="120" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3 4"/>
+          <line x1="13" y1="120" x2="13" y2="154" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3 4"/>
+          <circle cx="13" cy="18" r="5.5" fill="#102694"/>
+          <text x="32" y="22.5" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111111">categoria</text>
+          <circle cx="13" cy="52" r="5.5" fill="#102694"/>
+          <text x="32" y="56.5" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111111">filiado</text>
+          <circle cx="13" cy="86" r="5" fill="#ffffff" stroke="#f59e0b" stroke-width="2"/>
+          <text x="32" y="90.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#6b7280">o que ganha e pensa</text>
+          <circle cx="13" cy="120" r="5" fill="#ffffff" stroke="#102694" stroke-width="2"/>
+          <text x="32" y="124.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#374151">pauta</text>
+          <circle cx="13" cy="154" r="5" fill="#ffffff" stroke="#f59e0b" stroke-width="2"/>
+          <text x="32" y="158.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#6b7280">resultado na mesa</text>
+          </svg></figure>
+        <p class="miudo">Quem ainda não é filiado não está no cadastro, e é com ele que a campanha precisa falar.</p>
+      </article>
+
+      <article class="cartao cartao--branco">
+        <svg class="emblema" viewBox="0 0 86 86" role="img" aria-label="Uma planta de levantamento: parcela demarcada com marcos nos vértices, pontos já levantados e pontos pendentes, norte e escala."><path d="M 14.3 30.0 C 22.0 24.8 32.8 19.2 39.6 14.1" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 13.5 29.6 C 22.3 23.7 31.3 18.8 40.4 13.6" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 39.6 14.4 C 50.1 19.6 62.7 26.5 72.4 32.2" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 39.9 14.1 C 49.6 20.9 61.1 26.2 71.8 31.7" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 72.0 31.6 C 68.3 42.9 64.5 55.6 60.3 65.5" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 71.9 32.1 C 68.2 43.4 63.0 56.2 60.1 66.4" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 60.1 65.6 C 47.0 63.5 34.7 62.2 21.8 60.0" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 60.5 65.7 C 48.1 64.3 33.2 62.5 22.4 59.6" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 22.2 59.8 C 20.1 50.3 16.2 38.7 13.8 30.2" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.92"/><path d="M 22.3 60.0 C 18.5 50.3 16.9 40.2 14.1 30.1" fill="none" stroke="#00698f" stroke-width="1.7" stroke-linecap="round" opacity="0.45"/><path d="M 11.0 33.0 C 13.1 32.9 15.0 33.1 17.0 32.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 11.1 32.9 C 12.9 33.1 15.3 33.0 16.9 32.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 16.9 33.0 C 16.3 31.1 15.0 28.8 14.1 27.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 17.1 33.0 C 16.0 31.1 15.2 28.9 14.0 27.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 13.9 26.9 C 13.0 29.2 11.8 30.9 11.0 33.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 14.0 26.9 C 13.1 28.8 11.9 30.9 11.1 32.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 37.1 16.9 C 39.0 16.8 40.9 17.1 43.1 17.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 37.0 17.0 C 39.2 17.1 41.0 17.2 43.0 17.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 43.1 17.1 C 42.2 14.8 41.0 12.7 40.0 11.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 43.1 17.1 C 42.1 14.8 41.0 13.2 40.1 11.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 40.0 11.1 C 39.2 13.0 38.1 14.8 37.1 17.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 40.0 10.9 C 38.8 13.1 38.0 15.2 36.9 17.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 69.0 35.0 C 71.1 35.0 73.0 34.8 75.0 35.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 69.1 35.0 C 70.8 35.0 73.2 35.1 75.0 35.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 74.9 34.9 C 74.2 32.8 73.0 30.7 72.1 28.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 74.9 35.0 C 73.8 33.1 73.0 31.0 71.9 29.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 72.1 28.9 C 71.0 31.2 69.8 33.0 69.1 34.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 72.1 28.9 C 71.2 30.9 70.2 33.2 68.9 34.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 57.1 68.9 C 59.0 69.2 61.1 69.0 63.1 68.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 57.1 68.9 C 58.9 69.2 60.9 68.8 63.0 69.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 62.9 69.0 C 61.8 67.0 60.9 64.9 60.0 63.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 63.0 69.0 C 62.1 67.1 60.8 65.0 60.1 63.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 60.0 63.1 C 58.8 65.1 57.8 66.9 57.1 69.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 60.0 63.0 C 58.8 64.9 57.8 67.2 57.0 69.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 19.0 63.0 C 21.0 63.0 23.2 63.1 25.1 62.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 19.1 63.1 C 20.9 62.9 23.1 62.8 25.0 62.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 24.9 63.0 C 23.8 60.8 22.8 59.0 21.9 57.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 24.9 63.1 C 24.1 61.0 22.8 58.9 21.9 57.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><path d="M 21.9 57.1 C 21.2 59.1 20.0 60.9 18.9 62.9" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 21.9 57.0 C 21.1 58.8 20.0 61.0 19.1 63.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.45"/><circle cx="32" cy="38" r="2.6" fill="#00698f"/><circle cx="50" cy="48" r="2.6" fill="#00698f"/><path d="M 44.6 28.3 Q 44.0 29.0 44.0 29.6 Q 43.2 29.7 42.8 30.4 Q 41.9 30.6 41.3 30.6 Q 40.8 30.6 40.1 29.8 Q 39.6 29.0 39.4 28.5 Q 39.3 27.4 39.7 27.0 Q 40.5 26.9 40.6 25.9 Q 41.6 26.0 41.9 25.4 Q 42.2 25.2 43.4 25.7 Q 43.6 26.5 44.4 26.8 Q 44.7 27.7 44.6 28.3 " fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 60.7 40.1 Q 60.6 40.5 60.1 41.5 Q 60.0 41.9 59.0 42.4 Q 58.5 42.0 57.5 42.5 Q 56.6 42.6 56.2 41.9 Q 55.4 41.2 55.4 40.6 Q 55.7 39.9 55.5 39.1 Q 56.4 38.5 56.4 37.9 Q 56.7 37.1 57.8 37.4 Q 58.6 37.2 59.2 37.8 Q 59.2 37.9 60.2 38.7 Q 60.9 39.1 60.6 40.1 " fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 32.6 52.7 Q 32.5 53.8 31.7 53.9 Q 30.8 53.9 30.4 54.6 Q 29.6 54.2 28.9 54.4 Q 28.1 53.9 27.9 53.4 Q 28.0 52.3 27.3 52.0 Q 27.4 50.8 27.8 50.6 Q 28.4 50.1 28.9 49.6 Q 29.4 49.4 30.3 49.4 Q 31.3 49.5 31.6 50.1 Q 32.1 50.5 32.5 51.2 Q 32.7 52.4 32.5 52.7 " fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 79.1 24.1 C 78.9 19.4 79.4 14.0 78.8 9.8" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 79.0 10.0 L 78.1 12.8 L 79.9 12.8 Z" fill="#9aa3af" stroke="none"/><text x="79" y="32" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing=".6" fill="#9aa3af">N</text><path d="M 9.6 77.9 C 17.9 78.6 25.6 77.7 34.3 78.0" fill="none" stroke="#9aa3af" stroke-width="0.8" stroke-linecap="round" opacity="0.92"/><path d="M 10.0 75.1 C 9.9 76.1 10.0 77.1 10.0 78.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 18.0 75.0 C 17.9 76.0 18.1 77.1 18.0 78.1" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 26.0 75.0 C 26.1 75.9 26.0 77.1 26.0 78.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/><path d="M 33.9 75.0 C 33.9 75.9 34.0 77.0 34.0 78.0" fill="none" stroke="#9aa3af" stroke-width="0.6" stroke-linecap="round" opacity="0.92"/></svg>
+        <span class="selo selo--ong">ONG e terceiro setor</span>
+        <h4>O que vocês mostram ao financiador além do número de atendidos?</h4>
+        <figure class="porta"><svg viewBox="0 0 320 172" role="img" aria-label="Corrente da ONG: projeto e atendimento são medidos; o que mudou na vida do beneficiário e o relatório ao financiador, não.">
+          <line x1="13" y1="18" x2="13" y2="52" stroke="#00698f" stroke-width="2"/>
+          <line x1="13" y1="52" x2="13" y2="86" stroke="#00698f" stroke-width="2"/>
+          <line x1="13" y1="86" x2="13" y2="120" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3 4"/>
+          <line x1="13" y1="120" x2="13" y2="154" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3 4"/>
+          <circle cx="13" cy="18" r="5.5" fill="#00698f"/>
+          <text x="32" y="22.5" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111111">projeto</text>
+          <circle cx="13" cy="52" r="5.5" fill="#00698f"/>
+          <text x="32" y="56.5" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111111">atendimento</text>
+          <circle cx="13" cy="86" r="5" fill="#ffffff" stroke="#00698f" stroke-width="2"/>
+          <text x="32" y="90.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#374151">beneficiário</text>
+          <circle cx="13" cy="120" r="5" fill="#ffffff" stroke="#f59e0b" stroke-width="2"/>
+          <text x="32" y="124.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#6b7280">o que mudou</text>
+          <circle cx="13" cy="154" r="5" fill="#ffffff" stroke="#f59e0b" stroke-width="2"/>
+          <text x="32" y="158.5" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#6b7280">relatório ao financiador</text>
+          </svg></figure>
+        <p class="miudo">O que mudou na vida de quem foi atendido é a parte que quase nunca foi medida.</p>
+      </article>
+    </div>
+
+    <p style="margin-top:36px;max-width:40em">São os três setores que conhecemos de perto, mas o trabalho é o mesmo em qualquer negócio onde o contato chega por um canal e a venda acontece em outro.</p>
+  </div>
+</section>
+
+<!-- ================= O MERCADO ================= -->
+<section class="faixa faixa--tinta" id="mercado">
+  <div class="wrap">
+    <div class="q-faixa">
+      <img class="q-simbolo" src="assets/quantitare-simbolo.svg" alt="Símbolo do Quantitare" width="112" height="112">
+      <div>
+        <p class="q-nome">Levantamento Quantitare</p>
+        <h2 style="margin-top:14px;max-width:16em">Um número de cada setor, com fonte e com leitura.</h2>
+      </div>
+    </div>
+    <p style="margin-top:24px;max-width:38em">Dados públicos compilados por nós, com o que cada um muda na decisão de quem anuncia.</p>
+
+    <div class="mercado" style="margin-top:44px">
+      <article>
+        <span class="selo selo--obra">Mercado imobiliário</span>
+        <figure class="gr" style="margin-top:16px">
+          <svg viewBox="0 0 360 168" role="img" aria-label="Variação no 2º trimestre de 2026 contra o mesmo trimestre de 2025: unidades vendidas mais 5,3%, unidades lançadas menos 1,3%, valor geral de lançamentos menos 23,1%.">
+          <line x1="182" y1="14" x2="182" y2="146" stroke="#111111" stroke-width="1"/>
+          <text x="0" y="12" font-family="Inter, sans-serif" font-size="12" fill="#374151">Unidades vendidas · <tspan font-family="JetBrains Mono, monospace" font-weight="500" fill="#111111">+5,3%</tspan></text>
+          <rect x="182.0" y="20" width="36.7" height="16" rx="2" fill="#1256D3"/>
+          <text x="0" y="60" font-family="Inter, sans-serif" font-size="12" fill="#374151">Unidades lançadas · <tspan font-family="JetBrains Mono, monospace" font-weight="500" fill="#111111">−1,3%</tspan></text>
+          <rect x="173.0" y="68" width="9.0" height="16" rx="2" fill="#9aa3af"/>
+          <text x="0" y="108" font-family="Inter, sans-serif" font-size="12" fill="#374151">Valor lançado, o VGL · <tspan font-family="JetBrains Mono, monospace" font-weight="500" fill="#111111">−23,1%</tspan></text>
+          <rect x="22.0" y="116" width="160.0" height="16" rx="2" fill="#9aa3af"/>
+          <text x="182" y="160" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#6b7280">0</text>
+          </svg>
+          <figcaption>Variação do trimestre contra o mesmo trimestre de 2025</figcaption>
+        </figure>
+        <strong>+5,3%</strong>
+        <p class="mercado-frase">de unidades vendidas, com o valor lançado caindo 23,1%</p>
+        <p class="regua" style="margin-top:10px">Fonte: CBIC, 2º trimestre de 2026</p>
+        <p class="analise"><b>A análise</b>O setor lança quase o mesmo volume de imóveis, por um valor bem menor. E vende mais.</p>
+        <p class="analise"><b>No marketing</b>Margem menor em cada venda encolhe o quanto a empresa pode gastar para conseguir um comprador.</p>
+        <a class="btn btn--secundario" href="construtora.html">Ver o levantamento</a>
+      </article>
+
+      <article>
+        <span class="selo selo--sind">Sindicato</span>
+        <figure class="gr" style="margin-top:16px">
+          <svg viewBox="0 0 360 192" role="img" aria-label="Gráfico de pizza: 8,8% da população ocupada é sindicalizada e 91,2% não é, em 2025.">
+          <path d="M 85 95 L 85 27 A 68 68 0 0 1 120.7 37.1 Z" fill="#102694" stroke="#ffffff" stroke-width="2"/>
+          <path d="M 85 95 L 120.7 37.1 A 68 68 0 1 1 85 27 Z" fill="#e5e7eb" stroke="#ffffff" stroke-width="2"/>
+          <rect x="178" y="62" width="11" height="11" rx="2" fill="#102694"/>
+          <text x="196" y="72" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" fill="#111111">8,8%</text>
+          <text x="196" y="89" font-family="Inter, sans-serif" font-size="11.5" fill="#6b7280">são sindicalizados</text>
+          <rect x="178" y="108" width="11" height="11" rx="2" fill="#e5e7eb"/>
+          <text x="196" y="118" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" fill="#111111">91,2%</text>
+          <text x="196" y="135" font-family="Inter, sans-serif" font-size="11.5" fill="#6b7280">não são</text>
+          </svg>
+          <figcaption>Trabalhadores sindicalizados no Brasil, 2025</figcaption>
+        </figure>
+        <strong>8,8%</strong>
+        <p class="mercado-frase">da população ocupada é sindicalizada. Em 2012 era 16,1%</p>
+        <p class="regua" style="margin-top:10px">Fonte: IBGE, PNAD Contínua, ano-base 2025</p>
+        <p class="analise"><b>A análise</b>Em 2012 eram 14,4 milhões de sindicalizados. Em 2025 são 9,1 milhões, com mais gente trabalhando no país.</p>
+        <p class="analise"><b>No marketing</b>Filiação virou disputa, e campanha que fala só com quem já é filiado não traz gente nova.</p>
+        <a class="btn btn--secundario" href="sindicato.html">Ver o levantamento</a>
+      </article>
+
+      <article>
+        <span class="selo selo--ong">ONG e terceiro setor</span>
+        <figure class="gr" style="margin-top:16px">
+          <svg viewBox="0 0 360 188" role="img" aria-label="Crescimento no número de organizações da sociedade civil por região, de 2021 a 2023: Centro-Oeste 11%, Norte 9,9%, Sudeste 8,1%, Nordeste 7,1%, Sul 5,9%. Brasil: 7,8%.">
+          <line x1="237.8" y1="0" x2="237.8" y2="168" stroke="#6b7280" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="237.8" y="182" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#6b7280">Brasil 7,8%</text>
+          <line x1="100" y1="0" x2="100" y2="168" stroke="#111111" stroke-width="1"/>
+          <text x="100" y="182" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#6b7280">0</text>
+          <text x="92" y="25" text-anchor="end" font-family="Inter, sans-serif" font-size="12" fill="#374151">Centro-Oeste</text>
+          <line x1="100" y1="22" x2="294.3" y2="22" stroke="#00698f" stroke-width="2"/>
+          <circle cx="294.3" cy="22" r="5" fill="#00698f"/>
+          <text x="304.3" y="26" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" fill="#111111">11,0%</text>
+          <text x="92" y="59" text-anchor="end" font-family="Inter, sans-serif" font-size="12" fill="#374151">Norte</text>
+          <line x1="100" y1="56" x2="274.9" y2="56" stroke="#00698f" stroke-width="2"/>
+          <circle cx="274.9" cy="56" r="5" fill="#00698f"/>
+          <text x="284.9" y="60" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" fill="#111111">9,9%</text>
+          <text x="92" y="93" text-anchor="end" font-family="Inter, sans-serif" font-size="12" fill="#374151">Sudeste</text>
+          <line x1="100" y1="90" x2="243.1" y2="90" stroke="#00698f" stroke-width="2"/>
+          <circle cx="243.1" cy="90" r="5" fill="#00698f"/>
+          <text x="253.1" y="94" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" fill="#111111">8,1%</text>
+          <text x="92" y="127" text-anchor="end" font-family="Inter, sans-serif" font-size="12" fill="#374151">Nordeste</text>
+          <line x1="100" y1="124" x2="225.4" y2="124" stroke="#00698f" stroke-width="2"/>
+          <circle cx="225.4" cy="124" r="5" fill="#00698f"/>
+          <text x="235.4" y="128" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" fill="#111111">7,1%</text>
+          <text x="92" y="161" text-anchor="end" font-family="Inter, sans-serif" font-size="12" fill="#374151">Sul</text>
+          <line x1="100" y1="158" x2="204.2" y2="158" stroke="#00698f" stroke-width="2"/>
+          <circle cx="204.2" cy="158" r="5" fill="#00698f"/>
+          <text x="214.2" y="162" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" fill="#111111">5,9%</text>
+          </svg>
+          <figcaption>Crescimento de organizações por região, 2021 a 2023</figcaption>
+        </figure>
+        <strong>879 mil</strong>
+        <p class="mercado-frase">organizações ativas no país, 7,8% a mais que dois anos antes</p>
+        <p class="regua" style="margin-top:10px">Fonte: Mapa das OSCs, Ipea, dados de 2023</p>
+        <p class="analise"><b>A análise</b>São 63 mil organizações a mais em dois anos disputando o mesmo financiamento.</p>
+        <p class="analise"><b>No marketing</b>Como todas passaram a ter material institucional bem feito, ele não diferencia mais. O financiador decide pela prova do que mudou.</p>
+        <a class="btn btn--secundario" href="ong.html">Ver o levantamento</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= A PROVA ================= -->
+<section class="faixa faixa--cinza" id="prova">
+  <div class="wrap">
+    <h2 style="max-width:20em">Empresa do setor imobiliário há três anos e meio.</h2>
+    <p style="margin-top:16px;max-width:38em">A mesma conta, sem interrupção, desde janeiro de 2023. Em tráfego pago, a permanência média numa conta é bem menor que isso.</p>
+
+    <div class="numeros" style="margin-top:40px;grid-template-columns:repeat(3,minmax(0,1fr))">
+      <div class="numero"><strong>3,5 anos</strong><p class="regua">atendendo a mesma empresa do setor, sem interrupção</p></div>
+      <div class="numero"><strong>5×</strong><p class="regua">mais leads no mês, com investimento na mesma ordem de grandeza</p></div>
+      <div class="numero"><strong>4 clientes</strong><p class="regua">hoje: uma empresa do setor imobiliário e três organizações do terceiro setor</p></div>
+    </div>
+
+    <div class="dupla" style="margin-top:56px">
+      <div>
+        <h3>O funil que para antes do fim</h3>
+        <p style="margin-top:16px">No mesmo mês e na mesma conta, o caminho no Meta estava medido até o clique. A última etapa, que é a que interessa, não estava.</p>
+        <p class="regua" style="margin-top:16px">Dois terços da verba do mês rodavam sem custo por lead mensurável. Dissemos isso ao cliente, em vez de faturar em cima do que não se mede. Montar esse rastreamento é a Fundação, a fase 1 do método.</p>
+      </div>
+      <figure class="gr" style="margin-top:0">
+        <svg viewBox="0 0 360 242" role="img" aria-label="Funil do Meta Ads em abril de 2026: 115.364 pessoas alcançadas, 197.123 impressões, 6.312 cliques e a etapa de leads sem rastreamento.">
+          <path d="M 10.0 12 L 200.0 12 L 178.3 60 L 31.7 60 Z" fill="#1256D3" opacity="1.00"/>
+          <text x="214" y="28" font-family="Inter, sans-serif" font-size="11.5" fill="#6b7280">Alcance</text>
+          <text x="214" y="46" font-family="JetBrains Mono, monospace" font-size="14" font-weight="500" fill="#111111">115.364</text>
+          <path d="M 31.7 68 L 178.3 68 L 156.7 116 L 53.3 116 Z" fill="#1256D3" opacity="0.86"/>
+          <text x="214" y="84" font-family="Inter, sans-serif" font-size="11.5" fill="#6b7280">Impressões</text>
+          <text x="214" y="102" font-family="JetBrains Mono, monospace" font-size="14" font-weight="500" fill="#111111">197.123</text>
+          <text x="214" y="116" font-family="Inter, sans-serif" font-size="10.5" fill="#898989">1,7 por pessoa</text>
+          <path d="M 53.3 124 L 156.7 124 L 135.0 172 L 75.0 172 Z" fill="#1256D3" opacity="0.72"/>
+          <text x="214" y="140" font-family="Inter, sans-serif" font-size="11.5" fill="#6b7280">Cliques</text>
+          <text x="214" y="158" font-family="JetBrains Mono, monospace" font-size="14" font-weight="500" fill="#111111">6.312</text>
+          <text x="214" y="172" font-family="Inter, sans-serif" font-size="10.5" fill="#898989">3,20% das impressões</text>
+          <path d="M 75.0 180 L 135.0 180 L 135.0 228 L 75.0 228 Z" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="214" y="196" font-family="Inter, sans-serif" font-size="11.5" fill="#6b7280">Leads</text>
+          <text x="214" y="214" font-family="JetBrains Mono, monospace" font-size="14" font-weight="500" fill="#6b7280">não rastreado</text>
+          <text x="214" y="228" font-family="Inter, sans-serif" font-size="10.5" fill="#898989">sem medida</text>
+          </svg>
+        <figcaption>Meta Ads, abril de 2026</figcaption>
+      </figure>
+    </div>
+
+    <h3 style="margin-top:56px">E numa organização do terceiro setor</h3>
+    <p style="margin-top:16px;max-width:40em">Dois meses seguidos da mesma organização, medidos do mesmo jeito. Não publicamos o nome dela, e os números abaixo saem dos relatórios que entregamos.</p>
+
+    <div class="dupla" style="margin-top:36px">
+      <div>
+        <figure class="gr" style="margin-top:0">
+          <svg viewBox="0 0 400 176" role="img" aria-label="De setembro para outubro de 2026, o alcance caiu de 4,60 para 3,62 milhões e as visualizações subiram de 5,89 para 6,60 milhões.">
+            <text x="0" y="12" font-family="Inter, sans-serif" font-size="12" font-weight="600" letter-spacing="0.06em" fill="#6b7280">ALCANCE NO MÊS</text>
+            <text x="0" y="42" font-family="Inter, sans-serif" font-size="12" fill="#6b7280">set/2026</text>
+            <rect x="62" y="30" width="230" height="20" rx="3" fill="#FCD9A0"/>
+            <text x="300" y="44" font-family="JetBrains Mono, monospace" font-size="13" fill="#374151">4,60 mi</text>
+            <text x="0" y="72" font-family="Inter, sans-serif" font-size="12" fill="#111111" font-weight="600">out/2026</text>
+            <rect x="62" y="60" width="181" height="20" rx="3" fill="#00698f"/>
+            <text x="251" y="74" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" fill="#111111">3,62 mi</text>
+            <text x="0" y="112" font-family="Inter, sans-serif" font-size="12" font-weight="600" letter-spacing="0.06em" fill="#6b7280">VISUALIZAÇÕES NO MÊS</text>
+            <text x="0" y="142" font-family="Inter, sans-serif" font-size="12" fill="#6b7280">set/2026</text>
+            <rect x="62" y="130" width="205" height="20" rx="3" fill="#FCD9A0"/>
+            <text x="275" y="144" font-family="JetBrains Mono, monospace" font-size="13" fill="#374151">5,89 mi</text>
+            <text x="0" y="172" font-family="Inter, sans-serif" font-size="12" fill="#111111" font-weight="600">out/2026</text>
+            <rect x="62" y="160" width="230" height="20" rx="3" fill="#00698f"/>
+            <text x="300" y="174" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" fill="#111111">6,60 mi</text>
+          </svg>
+          <figcaption>Meta, Instagram e Google somados, sem deduplicar entre as plataformas.</figcaption>
+        </figure>
+      </div>
+      <div>
+        <div class="numeros" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="numero"><strong>+75.333</strong><p class="regua">seguidores no Instagram em um mês, de 735.659 para 810.992</p></div>
+          <div class="numero"><strong>+17%</strong><p class="regua">de inscritos novos no YouTube, de 8.655 para 10.129</p></div>
+        </div>
+        <p class="analise" style="margin-top:24px"><b>A análise</b>O alcance caiu 21% e as visualizações subiram 12%. Alcance comprado e audiência conquistada são coisas diferentes, e só dá para ver isso medindo as duas.</p>
+        <p class="regua" style="margin-top:16px">Os relatórios dizem onde o dado está incompleto: períodos parciais e somas sem deduplicação vão escritos na própria página em que aparecem.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:56px">O que chega na sua mão todo mês</h3>
+    <p style="margin-top:16px;max-width:38em">A ferramenta gera os números. Os comentários escrevemos nós, e é neles que está a diferença entre um painel e alguém acompanhando a sua conta.</p>
+
+    <div class="folha" style="margin-top:32px;max-width:48em">
+      <div class="folha__cab">
+        <h4>Relatório mensal de tráfego pago</h4>
+        <span class="folha__sel">Modelo do formato</span>
+      </div>
+      <div class="rel-graficos">
+        <div>
+          <h5>Do anúncio ao lead</h5>
+          <svg viewBox="0 0 360 186" role="img" aria-label="Funil do Google Ads em abril de 2026: 7.079 impressões, 364 cliques, que são 5,14%, e 104 leads, que são 28,6% dos cliques.">
+          <path d="M 10.0 12 L 200.0 12 L 167.5 60 L 42.5 60 Z" fill="#1256D3" opacity="1.00"/>
+          <text x="214" y="28" font-family="Inter, sans-serif" font-size="11.5" fill="#6b7280">Impressões</text>
+          <text x="214" y="46" font-family="JetBrains Mono, monospace" font-size="14" font-weight="500" fill="#111111">7.079</text>
+          <path d="M 42.5 68 L 167.5 68 L 135.0 116 L 75.0 116 Z" fill="#1256D3" opacity="0.86"/>
+          <text x="214" y="84" font-family="Inter, sans-serif" font-size="11.5" fill="#6b7280">Cliques</text>
+          <text x="214" y="102" font-family="JetBrains Mono, monospace" font-size="14" font-weight="500" fill="#111111">364</text>
+          <text x="214" y="116" font-family="Inter, sans-serif" font-size="10.5" fill="#898989">5,14% das impressões</text>
+          <path d="M 75.0 124 L 135.0 124 L 135.0 172 L 75.0 172 Z" fill="#1256D3" opacity="0.72"/>
+          <text x="214" y="140" font-family="Inter, sans-serif" font-size="11.5" fill="#6b7280">Leads</text>
+          <text x="214" y="158" font-family="JetBrains Mono, monospace" font-size="14" font-weight="500" fill="#111111">104</text>
+          <text x="214" y="172" font-family="Inter, sans-serif" font-size="10.5" fill="#898989">28,6% dos cliques</text>
+          </svg>
+        </div>
+        <div>
+          <h5>Investimento por plataforma</h5>
+          <svg viewBox="0 0 360 192" role="img" aria-label="Gráfico de pizza do investimento de abril de 2026: R$ 1.042,96 no Meta Ads e R$ 551,79 no Google Ads.">
+          <path d="M 85 95 L 85.0 27.0 A 68 68 0 1 1 29.0 133.6 Z" fill="#1256D3" stroke="#ffffff" stroke-width="2"/>
+          <path d="M 85 95 L 29.0 133.6 A 68 68 0 0 1 85.0 27.0 Z" fill="#FCD9A0" stroke="#ffffff" stroke-width="2"/>
+          <rect x="178" y="40" width="11" height="11" rx="2" fill="#1256D3"/>
+          <text x="196" y="50" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" fill="#111111">R$ 1.042,96</text>
+          <text x="196" y="67" font-family="Inter, sans-serif" font-size="11.5" fill="#6b7280">Meta Ads</text>
+          <rect x="178" y="86" width="11" height="11" rx="2" fill="#FCD9A0"/>
+          <text x="196" y="96" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" fill="#111111">R$ 551,79</text>
+          <text x="196" y="113" font-family="Inter, sans-serif" font-size="11.5" fill="#6b7280">Google Ads</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="folha__com">
+        <h4>Comentários</h4>
+        <p class="miudo" style="margin-top:10px">O que mudou, a causa, o que já foi ajustado, o que vem no mês que vem e o que precisamos de vocês.</p>
+      </div>
+    </div>
+    <p class="regua" style="margin-top:20px;max-width:46em">Números reais, do mesmo cliente e do mesmo mês.</p>
+
+    <div class="cta" style="margin-top:48px;background:var(--canvas)">
+      <div>
+        <h4>Quer ver onde a sua contagem para hoje?</h4>
+        <p class="regua" style="margin-top:8px">Olhamos o seu atendimento, o seu Instagram, a sua página e os seus anúncios, e gravamos um vídeo de até cinco minutos com o que achamos. Talvez faça sentido para você agora, talvez não.</p>
+      </div>
+      <div class="botoes">
+        <a class="btn btn--ambar" href="https://wa.me/5561985993459?text=Oi%20Neftal%C3%AD%2C%20vi%20os%20resultados%20no%20site%20e%20queria%20receber%20o%20diagn%C3%B3stico." rel="noopener">Receber o diagnóstico</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PREÇO ================= -->
+<section class="faixa" id="preco">
+  <div class="wrap">
+    <h2 style="max-width:20em">A verba do anúncio vem separada do serviço.</h2>
+    <p style="margin-top:16px;max-width:38em">O investimento em anúncio você paga direto ao Google e ao Meta, e ele nunca passa pela nossa conta. O que cobramos é o trabalho, e o valor sai do escopo: quantas plataformas, o que já existe montado na conta e quantas campanhas por mês.</p>
+
+    <div class="dupla" style="margin-top:40px">
+      <div>
+        <h4>As condições, ditas por inteiro</h4>
+        <ul class="lista-limpa miudo">
+          <li>O valor sai na primeira conversa, com o escopo escrito ao lado</li>
+          <li>Contrato de 6 meses, com <strong>desconto à vista</strong></li>
+          <li><strong>O reajuste anual vai escrito na proposta</strong></li>
+          <li>Escopo novo é contratação nova, não reajuste</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Pesquisa é orçada por projeto</h4>
+        <p class="miudo">Aqui não temos tabela, e não vamos inventar uma. O preço sai de baixo para cima: desenho do questionário, coleta, tratamento, análise e apresentação. Pagamento em três partes, 40% na assinatura, 30% no banco de dados e 30% no relatório.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= QUEM ATENDE E CONTATO ================= -->
+<section class="faixa faixa--azul" id="contato">
+  <div class="wrap">
+    <h2 style="max-width:20em">Quem atende você</h2>
+    <div class="autor">
+      <img src="assets/neftali-saez.jpg" alt="Neftalí Sáez" width="140" height="140" loading="lazy">
+      <p>Somos um time pequeno. Quem conduz o projeto e fala com você é o <strong>Neftalí Sáez</strong>, engenheiro industrial e estatístico.</p>
+    </div>
+
+    <div class="cta cartao--branco" style="margin-top:40px;background:var(--canvas)">
+      <div>
+        <h3>Antes de qualquer proposta, mandamos uma análise gravada da sua medição.</h3>
+        <p class="regua" style="margin-top:12px">Um vídeo de até cinco minutos, que você assiste quando quiser e aplica sozinho se preferir. Se fizer sentido depois dele, conversamos vinte minutos.</p>
+      </div>
+      <div class="botoes">
+        <a class="btn btn--primario" href="https://wa.me/5561985993459?text=Oi%20Neftal%C3%AD%2C%20li%20o%20site%20e%20queria%20receber%20o%20diagn%C3%B3stico." rel="noopener">Receber o diagnóstico</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= RODAPÉ ================= -->
+<footer class="faixa faixa--escura">
+  <div class="wrap rodape">
+    <div class="rodape__grade">
+      <div>
+        <p class="marca" style="font-family:var(--display);font-weight:700;font-size:1.0625rem;letter-spacing:-.5px">Sáez Marketing</p>
+        <p style="margin-top:12px;max-width:32em">Medição e evidência para o mercado imobiliário, sindicato e ONG. Tráfego pago e pesquisa estatística são os instrumentos; o serviço é um só.</p>
+        <p style="margin-top:16px;display:flex;align-items:center;gap:12px">
+          <img src="assets/quantitare-simbolo-ciano.svg" alt="" width="28" height="28" aria-hidden="true">
+          <span>Quantitare é a marca da linha de pesquisa.</span>
+        </p>
+      </div>
+      <div>
+        <h4>Levantamento</h4>
+        <ul class="lista-limpa" style="margin-top:16px">
+          <li><a href="construtora.html">Mercado imobiliário</a></li>
+          <li><a href="sindicato.html">Sindicato</a></li>
+          <li><a href="ong.html">ONG e terceiro setor</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Seções</h4>
+        <ul class="lista-limpa" style="margin-top:16px">
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#portas">Para quem</a></li>
+          <li><a href="#mercado">O mercado</a></li>
+          <li><a href="#prova">A prova</a></li>
+          <li><a href="#preco">Como cobramos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <ul class="lista-limpa" style="margin-top:16px">
+          <li><a href="https://wa.me/5561985993459" rel="noopener">WhatsApp (61) 98599-3459</a></li>
+          <li><a href="mailto:contato@saezmarketing.com">contato@saezmarketing.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="rodape__linha">
+      <p>Sáez Marketing e Representações · CNPJ 31.743.926/0001-09</p>
+      <p>Nenhum resultado é prometido. Os números são de um cliente real, com a referência ao lado.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
