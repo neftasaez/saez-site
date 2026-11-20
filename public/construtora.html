@@ -464,19 +464,16 @@ tr:last-child td{border-bottom:0}
   </div>
 </footer>
 <!-- ================= MEDIÇÃO =================
-     Quando houver o contêiner, troque GTM-XXXXXXX abaixo e tire os <!- - - ->
-     do bloco. O listener embaixo funciona com ou sem GTM: ele só empilha o
-     evento em dataLayer, que é de onde o GTM, o GA4 e o pixel leem.
-
+     Contêiner GTM-MN8LW4N. O pixel do Meta e o GA4 entram por dentro do GTM,
+     não aqui: assim trocar de ferramenta não mexe na página.
+     O listener abaixo empilha o clique de cada CTA em dataLayer, com a origem. -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+})(window,document,'script','dataLayer','GTM-MN8LW4N');</script>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN8LW4N"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
-================= FIM DO BLOCO DO GTM ================= -->
 <script>
 window.dataLayer = window.dataLayer || [];
 document.addEventListener('click', function (e) {
