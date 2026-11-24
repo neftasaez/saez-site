@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quantitare · Pesquisa estatística</title>
+<meta name="description" content="Pergunta para a base certa e trata a resposta. Instrumento, coleta, banco tratado e relatório que abre pela ficha técnica.">
+<meta property="og:title" content="Quantitare · Pesquisa estatística">
+<meta property="og:description" content="Pergunta para a base certa e trata a resposta. Instrumento, coleta, banco tratado e relatório que abre pela ficha técnica.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://saezmarketing.com/quantitare">
+<meta property="og:image" content="https://saezmarketing.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://saezmarketing.com/quantitare">
+<link rel="icon" href="assets/quantitare-simbolo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+  *{box-sizing:border-box} img{max-width:100%}
+  html,body{margin:0}
+  :root{
+    --canvas:#ffffff; --surface-card:#F3F7FE; --surface-dark:#101010;
+    --hairline:#e5e7eb; --ink:#111111; --body:#374151; --muted:#6b7280;
+    --on-primary:#ffffff; --on-dark-soft:#a1a1aa;
+    --primary:#1256D3; --primary-active:#0F47AE; --azul:#1256D3;
+    --ciano:#009EDD; --violeta:#102694; --ambar:#f59e0b;
+    --display:"Manrope",system-ui,sans-serif; --text:"Inter",system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+    --canvas:#101010; --surface-card:#16202E; --surface-dark:#141C28;
+    --hairline:#2a2a2a; --ink:#ffffff; --body:#d4d4d8; --muted:#a1a1aa;
+    --primary:#4B84EE; --primary-active:#3B6FD6; --on-primary:#ffffff; --azul:#7FA8F5;
+    --ciano:#38bdf8; --violeta:#7c93e8; color-scheme:dark; } }
+  :root[data-theme="dark"]{
+    --canvas:#101010; --surface-card:#16202E; --surface-dark:#141C28;
+    --hairline:#2a2a2a; --ink:#ffffff; --body:#d4d4d8; --muted:#a1a1aa;
+    --primary:#4B84EE; --primary-active:#3B6FD6; --on-primary:#ffffff; --azul:#7FA8F5;
+    --ciano:#38bdf8; --violeta:#7c93e8; color-scheme:dark; }
+  body{background:var(--canvas); color:var(--body); font-family:var(--text);
+    font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:430px; margin:0 auto;
+    padding-left:max(16px,env(safe-area-inset-left,0px));
+    padding-right:max(16px,env(safe-area-inset-right,0px));
+    padding-block:40px 0; display:flex; flex-direction:column; gap:26px;}
+  h1{margin:0; font-family:var(--display); font-weight:700; font-size:26px;
+    line-height:1.2; letter-spacing:-0.6px; color:var(--ink); text-wrap:balance;}
+  h2{margin:0 0 2px; font-family:var(--display); font-weight:700; font-size:17px;
+    line-height:1.25; letter-spacing:-0.3px; color:var(--ink); text-wrap:balance;}
+  .eyebrow{margin:0; font-size:12px; font-weight:600; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--azul);}
+  .card{background:var(--surface-card); border-radius:12px; padding:20px;
+    display:flex; flex-direction:column; gap:10px;}
+  .card p{margin:0}
+  a.btn{display:block; text-decoration:none; border-radius:8px; padding:15px 18px;
+    font-size:15px; font-weight:600; transition:background-color .15s,border-color .15s;}
+  a.btn:focus-visible{outline:2px solid var(--ciano); outline-offset:2px}
+  a.primary{background:var(--primary); color:var(--on-primary); text-align:center}
+  a.primary:hover{background:var(--primary-active)}
+  a.secondary{background:var(--canvas); color:var(--ink); border:1px solid var(--hairline)}
+  a.secondary:hover{border-color:var(--muted)}
+  a.btn .sub{display:block; font-weight:400; font-size:13px; margin-top:3px}
+  a.primary .sub{opacity:.78}
+  a.secondary .sub{color:var(--muted)}
+  .links{display:flex; flex-direction:column; gap:10px}
+  footer{background:var(--surface-dark); color:var(--on-dark-soft);
+    border-radius:12px 12px 0 0; margin-top:12px;
+    padding-left:max(20px,env(safe-area-inset-left,0px));
+    padding-right:max(20px,env(safe-area-inset-right,0px));
+    padding-block:24px 28px; display:flex; flex-direction:column; gap:16px;
+    font-size:13px; line-height:1.5;}
+  footer strong{color:#fff; font-family:var(--display); font-weight:700; font-size:15px;
+    letter-spacing:-.2px; display:block; margin-bottom:3px;}
+  .fine{color:#71717a; font-size:12px; margin:0; padding-top:12px; border-top:1px solid #2a2a2a}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+  .top{display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center}
+  .simbolo{width:72px; height:72px}
+  .wordmark{margin:0; font-family:var(--display); font-weight:700; font-size:28px;
+    letter-spacing:.14em; color:var(--violeta); text-transform:uppercase;}
+  .tagline{margin:0; font-size:12px; font-weight:600; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--azul);}
+  .lead{margin:0; font-size:19px; line-height:1.35; color:var(--ink); font-weight:600;
+    text-align:center; text-wrap:balance;}
+  ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:11px}
+  .perguntas li{font-size:15px; line-height:1.45; color:var(--ink); padding-left:18px;
+    position:relative;}
+  .perguntas li::before{content:""; position:absolute; left:0; top:.6em;
+    width:7px; height:7px; border-radius:9999px; background:var(--ciano);}
+  .entrega li{display:flex; gap:12px; font-size:14px; line-height:1.5; color:var(--body)}
+  .entrega .n{flex:none; width:22px; height:22px; border-radius:9999px;
+    background:var(--ciano); color:#fff; font-size:12px; font-weight:700;
+    display:grid; place-items:center; margin-top:1px;}
+  .entrega b{color:var(--ink); font-weight:600}
+  .destaque{color:var(--ciano); font-weight:600}
+  .ficha{background:var(--surface-dark); color:#d4d4d8; border-radius:12px; padding:22px 20px;
+    display:flex; flex-direction:column; gap:12px;}
+  .ficha h2{color:#fff}
+  .ficha p{margin:0; font-size:14px; line-height:1.55}
+  .ficha .punch{color:#fff; font-weight:600; font-size:15px;
+    padding-top:12px; border-top:1px solid #2a2a2a;}
+  .antes{margin:0; font-size:14px; color:var(--muted); text-align:center}
+  .voltar{display:block; text-align:center; font-size:13px; color:var(--muted);
+    text-decoration:none; padding:4px}
+  .voltar:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <img class="simbolo" src="assets/quantitare-simbolo.svg" alt="" width="72" height="72">
+    <p class="wordmark">Quantitare</p>
+    <p class="tagline">Pesquisa, Desenvolvimento e Capacitação</p>
+  </header>
+
+  <p class="lead">Perguntamos para a base certa e tratamos a resposta.</p>
+
+  <section>
+    <p class="eyebrow" style="margin-bottom:14px">Perguntas que a gente responde com número</p>
+    <ul class="perguntas">
+      <li>Quem são os nossos filiados, de verdade?</li>
+      <li>Quanto a categoria ganha hoje, por função e por região?</li>
+      <li>O que a categoria quer, antes da campanha salarial?</li>
+      <li>Por que o filiado entra, por que sai, por que fica?</li>
+      <li>O que mudou na vida de quem foi atendido?</li>
+    </ul>
+    <p class="antes" style="margin-top:16px">Impacto só se mede se medir antes.
+    Depois não dá para recuperar.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow" style="margin-bottom:14px">O que você recebe</p>
+    <ul class="entrega">
+      <li><span class="n">1</span><span><b>Instrumento</b> — o questionário, revisado e
+        testado antes de ir a campo</span></li>
+      <li><span class="n">2</span><span><b>Plano de coleta</b> — quem responde, quantos,
+        como se chega neles</span></li>
+      <li><span class="n">3</span><span><b>Coleta</b> — online sobre a sua própria base,
+        sempre que possível</span></li>
+      <li><span class="n">4</span><span><b>Banco tratado</b> — os dados limpos e
+        organizados. <span class="destaque">O banco é seu.</span></span></li>
+      <li><span class="n">5</span><span><b>Relatório com ficha técnica</b></span></li>
+      <li><span class="n">6</span><span><b>Apresentação para quem não é da área</b> — a
+        versão que vai à assembleia ou ao conselho</span></li>
+    </ul>
+  </section>
+
+  <section class="ficha">
+    <h2>Todo relatório abre pela ficha técnica</h2>
+    <p>Quantas pessoas responderam, quando, e como foram escolhidas. Sem isso o número não
+    significa nada, e é essa página que sustenta o resto quando alguém do outro lado da
+    mesa questionar.</p>
+  </section>
+
+  <nav class="links">
+    <a class="btn primary" data-cta="quantitare-whatsapp" target="_blank" rel="noopener"
+       href="https://wa.me/5561985993459?text=Oi%20Neftal%C3%AD%2C%20vim%20pelo%20Instagram%20e%20queria%20falar%20sobre%20pesquisa%20estat%C3%ADstica.">
+      Falar sobre pesquisa
+      <span class="sub">Para sindicato, ONG e empresa do setor imobiliário</span>
+    </a>
+    <a class="voltar" href="links-smkt.html">← Voltar</a>
+  </nav>
+
+  <footer>
+    <div><strong>Sáez Marketing</strong>Contrato e nota fiscal pela Sáez Marketing e
+    Representações · CNPJ ativo desde 2018</div>
+    <p class="fine">Brasília, DF · Atendimento em português e espanhol</p>
+  </footer>
+</div>
+<!-- ================= MEDIÇÃO =================
+     Contêiner GTM-MN8LW4N. O pixel do Meta e o GA4 entram por dentro do GTM,
+     não aqui: assim trocar de ferramenta não mexe na página.
+     O listener abaixo empilha o clique de cada CTA em dataLayer, com a origem. -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MN8LW4N');</script>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN8LW4N"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>
+window.dataLayer = window.dataLayer || [];
+document.addEventListener('click', function (e) {
+  var a = e.target.closest ? e.target.closest('a[data-cta]') : null;
+  if (!a) return;
+  window.dataLayer.push({
+    event: 'clique_whatsapp',
+    origem: a.getAttribute('data-cta'),
+    pagina: document.title
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
