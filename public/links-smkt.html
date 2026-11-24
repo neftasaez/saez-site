@@ -131,7 +131,7 @@
 
   <nav class="links" aria-label="Links">
     <a class="btn primary" data-cta="bio-whatsapp" target="_blank" rel="noopener"
-       href="https://wa.me/5561985993459?text=Oi%20Neftal%C3%AD%2C%20vim%20pelo%20Instagram%20e%20queria%20receber%20o%20diagn%C3%B3stico.">
+       href="https://wa.me/5561985993459?text=Oi%20Neftal%C3%AD%2C%20queria%20receber%20o%20diagn%C3%B3stico.">
       Receber o diagnóstico
       <span class="sub">Um vídeo de até cinco minutos sobre a sua medição, sem compromisso</span>
     </a>
@@ -169,15 +169,49 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
 window.dataLayer = window.dataLayer || [];
+/* canal: de onde a pessoa veio, lido da própria URL. utm_source é o padrão;
+   c= é o atalho curto. Sem nenhum dos dois, fica "(direto)". */
+window.saezCanal = (function () {
+  try {
+    var p = new URLSearchParams(location.search);
+    var c = (p.get('utm_source') || p.get('c') || '').toLowerCase();
+    return c.replace(/[^a-z0-9_-]/g, '').slice(0, 24) || '(direto)';
+  } catch (e) { return '(direto)'; }
+})();
 document.addEventListener('click', function (e) {
   var a = e.target.closest ? e.target.closest('a[data-cta]') : null;
   if (!a) return;
   window.dataLayer.push({
     event: 'clique_whatsapp',
     origem: a.getAttribute('data-cta'),
+    canal: window.saezCanal,
     pagina: document.title
   });
 }, { passive: true });
+</script>
+
+<script>
+/* Escreve o canal na mensagem do WhatsApp, a partir da URL.
+   saezmarketing.com/links-smkt?c=instagram  ->  "Vim pelo Instagram."
+   Sem canal na URL, a mensagem fica como está no HTML. */
+(function () {
+  var c = window.saezCanal;
+  if (!c || c === '(direto)') return;
+  var nomes = {
+    instagram: 'pelo Instagram', linkedin: 'pelo LinkedIn', facebook: 'pelo Facebook',
+    youtube: 'pelo YouTube', email: 'pelo e-mail', assinatura: 'pela assinatura de e-mail',
+    whatsapp: 'pelo WhatsApp', cartao: 'pelo cartão', qr: 'pelo QR code',
+    evento: 'de um evento', indicacao: 'por indicação', google: 'pelo Google'
+  };
+  var frase = ' Vim ' + (nomes[c] || ('por ' + c)) + '.';
+  document.querySelectorAll('a[href*="wa.me"]').forEach(function (a) {
+    try {
+      var u = new URL(a.href);
+      u.searchParams.set('text', u.searchParams.get('text') + frase);
+      a.href = u.toString();
+    } catch (e) {}
+  });
+})();
 </script>
 </body>
 </html>
